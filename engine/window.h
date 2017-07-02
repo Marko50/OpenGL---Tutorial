@@ -69,17 +69,17 @@ const char * secondshader = "#version 330 core\n"
         "}\n\0";
 
 
-const char * secondshaderb = "#version 330 core\n"  //Exercise 3 
+const char * secondshaderb = "#version 330 core\n"  //Exercise 3
         "out vec4 FragColor;\n"
         "\n"
         "void main()\n"
         "{\n"
-        "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+        "    FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
         "}\n\0";
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 void initGLBuffers(unsigned int& VAO, unsigned int& VBO,unsigned int& EBO, float vert[], int size);
-int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram);
-void renderLoop(GLFWwindow* window, unsigned int & shaderProgram, unsigned int VAO[], unsigned int EBO[]);
+int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram, int shad);
+void renderLoop(GLFWwindow* window, unsigned int shaderProgram[], unsigned int VAO[], unsigned int EBO[]);

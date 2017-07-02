@@ -32,7 +32,7 @@ void initGLBuffers(unsigned int& VAO, unsigned int& VBO,unsigned int& EBO, float
     glBindVertexArray(0);
 }
 
-int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram){
+int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram, int shad){
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &firstshadder, NULL);
     glCompileShader(vertexShader);
@@ -45,7 +45,11 @@ int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigne
         return -1;
     }
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader,1,&secondshader, NULL);
+    if(shad == 1)
+        glShaderSource(fragmentShader,1,&secondshader, NULL);
+    else if (shad == 2)
+        glShaderSource(fragmentShader,1,&secondshaderb, NULL);
+
     glCompileShader(fragmentShader);
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if(!success){
@@ -71,15 +75,15 @@ int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigne
     return 0;
 }
 
-void renderLoop(GLFWwindow* window, unsigned int & shaderProgram, unsigned int VAO[], unsigned int EBO[]){
+void renderLoop(GLFWwindow* window, unsigned int  shaderProgram[], unsigned int VAO[], unsigned int EBO[]){
     while(!glfwWindowShouldClose(window)){
         //input
         processInput(window);
         //render commands
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glUseProgram(shaderProgram);
         for(int i = 0; i < 2; i ++){
+            glUseProgram(shaderProgram[i]);
             glBindVertexArray(VAO[i]);
             glDrawArrays(GL_TRIANGLES, 0,3);
         }
@@ -116,10 +120,15 @@ int main(){
     initGLBuffers(VAO[0], VBO[0], EBO[0],vertices3, sizeof(vertices3));
     initGLBuffers(VAO[1], VBO[1], EBO[1],vertices4, sizeof(vertices4));
 
-    unsigned int vertexShader, fragmentShader, shaderProgram;
-    if(vertexInit(vertexShader, fragmentShader, shaderProgram) == -1){
+    unsigned int vertexShader, fragmentShader, shaderProgram[2];
+    if(vertexInit(vertexShader, fragmentShader, shaderProgram[0],1) == -1){
         glfwTerminate();
         std::cout << "ERROR::Shaders init failed!" << std::endl;
+        return -1;
+    }
+    if(vertexInit(vertexShader, fragmentShader, shaderProgram[1],2) == -1){
+        glfwTerminate();
+        std::cout << "ERROR::Shaders init failed! 2" << std::endl;
         return -1;
     }
 
