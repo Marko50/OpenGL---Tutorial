@@ -2,6 +2,7 @@
 // Created by user on 27-06-2017.
 //
 
+#include <math.h>
 #include "../deps/glad/glad.h"
 #include "../include/GLFW/glfw3.h"
 #include <iostream>
@@ -38,6 +39,13 @@ float vertices4[] = {
         0.0f,  0.0f, 0.0f, // top
 };
 
+float vertices5[] = { //Tutorial
+        // positions         // colors
+        0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+        0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top
+};
+
 //Rectangle vertices --> Tutorial
 float vertices[] = {
         0.5f,  0.5f, 0.0f,  // top right
@@ -52,29 +60,36 @@ unsigned int indices[] = {  // note that we start from 0!
         1, 2, 3    // second triangle
 };
 
-const char * firstshadder = "#version 330 core\n"
+const char * vshader = "#version 330 core\n" //vertex shader
         "layout (location = 0) in vec3 aPos;\n"
+        "layout (location = 1) in vec3 aColor;\n"
+        "out vec4 vertexColor;\n"
+        "out vec3 ourColor;\n"
         "\n"
         "void main()\n"
         "{\n"
         "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "    vertexColor = vec4(0.5,0.0,0.0,1.0);\n"
+        "    ourColor = aColor;\n"
         "}\0";
 
-const char * secondshader = "#version 330 core\n"
+const char * fshader = "#version 330 core\n" //Fragment shader
         "out vec4 FragColor;\n"
+        "in vec4 vertexColor;\n"
         "\n"
         "void main()\n"
         "{\n"
-        "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+        "    FragColor = vertexColor;\n"
         "}\n\0";
 
 
-const char * secondshaderb = "#version 330 core\n"  //Exercise 3
+const char * fshaderb= "#version 330 core\n"  //Exercise 3
         "out vec4 FragColor;\n"
+        "in vec3 ourColor;\n"
         "\n"
         "void main()\n"
         "{\n"
-        "    FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
+        "    FragColor = vec4(ourColor,1.0);\n"
         "}\n\0";
 
 
@@ -82,4 +97,4 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
 void initGLBuffers(unsigned int& VAO, unsigned int& VBO,unsigned int& EBO, float vert[], int size);
 int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram, int shad);
-void renderLoop(GLFWwindow* window, unsigned int shaderProgram[], unsigned int VAO[], unsigned int EBO[]);
+void renderLoop(GLFWwindow* window, unsigned int shaderProgram[], unsigned int VAO[], unsigned int EBO[], unsigned int c);

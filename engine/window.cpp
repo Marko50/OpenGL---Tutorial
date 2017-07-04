@@ -26,15 +26,19 @@ void initGLBuffers(unsigned int& VAO, unsigned int& VBO,unsigned int& EBO, float
     //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW); RECTANGLE
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, size , vert, GL_STATIC_DRAW);
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void *) 0);
+    //position
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void *) 0);
     glEnableVertexAttribArray(0);
+    //color
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,6*sizeof(float),(void *) (3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
 
 int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigned int& shaderProgram, int shad){
     vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &firstshadder, NULL);
+    glShaderSource(vertexShader, 1, &vshader, NULL);
     glCompileShader(vertexShader);
     int success;
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
@@ -46,9 +50,9 @@ int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigne
     }
     fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     if(shad == 1)
-        glShaderSource(fragmentShader,1,&secondshader, NULL);
+        glShaderSource(fragmentShader,1,&fshader, NULL);
     else if (shad == 2)
-        glShaderSource(fragmentShader,1,&secondshaderb, NULL);
+        glShaderSource(fragmentShader,1,&fshaderb, NULL);
 
     glCompileShader(fragmentShader);
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
@@ -75,20 +79,24 @@ int vertexInit(unsigned int& vertexShader, unsigned int& fragmentShader, unsigne
     return 0;
 }
 
-void renderLoop(GLFWwindow* window, unsigned int  shaderProgram[], unsigned int VAO[], unsigned int EBO[]){
+void renderLoop(GLFWwindow* window, unsigned int  shaderProgram[], unsigned int VAO[], unsigned int EBO[], unsigned int c){
     while(!glfwWindowShouldClose(window)){
         //input
         processInput(window);
         //render commands
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        for(int i = 0; i < 2; i ++){
-            glUseProgram(shaderProgram[i]);
+       // float timeValue = glfwGetTime();
+        //float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        for(int i = 0; i < c; i ++){
+           int vertexColorLocation = glGetUniformLocation( shaderProgram[i],"ourColor");
+           // glUseProgram(shaderProgram[i]);
+            //if(vertexColorLocation != -1){
+              //  glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+            //}
             glBindVertexArray(VAO[i]);
             glDrawArrays(GL_TRIANGLES, 0,3);
         }
-        //glBindVertexArray(VAO[0]);
-        glDrawArrays(GL_TRIANGLES, 0,3);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -114,11 +122,13 @@ int main(){
         return -1;
     }
 
-
+    int nrAttributes;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+    std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
     unsigned int VAO[2],VBO[2],EBO[2];
 
-    initGLBuffers(VAO[0], VBO[0], EBO[0],vertices3, sizeof(vertices3));
-    initGLBuffers(VAO[1], VBO[1], EBO[1],vertices4, sizeof(vertices4));
+    initGLBuffers(VAO[0], VBO[0], EBO[0],vertices5, sizeof(vertices5));
+    //initGLBuffers(VAO[1], VBO[1], EBO[1],vertices5, sizeof(vertices5));
 
     unsigned int vertexShader, fragmentShader, shaderProgram[2];
     if(vertexInit(vertexShader, fragmentShader, shaderProgram[0],1) == -1){
@@ -132,7 +142,7 @@ int main(){
         return -1;
     }
 
-    renderLoop(window,shaderProgram, VAO,EBO);
+    renderLoop(window,shaderProgram, VAO,EBO,1);
 
     glfwTerminate();
     return 0;
