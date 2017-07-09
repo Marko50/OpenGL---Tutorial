@@ -11,11 +11,8 @@ class Triangle: public Shape{
 private:
 
 public:
-    Triangle(float inf[], int infSize, int sizeNextVertex, int posFirstVertex, const char * vertexShaderPath, const char * fragmentShaderPath) : Shape(inf,infSize,sizeNextVertex,posFirstVertex, vertexShaderPath, fragmentShaderPath){
-        this->initGLBuffers();
-    }
-    Triangle(float *inf, int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor,
-             const char *vertexShaderPath, const char *fragmentShaderPath) : Shape(inf,infSize, sizeNextVertex,posFirstVertex, sizeNextColor, posFirstColor, vertexShaderPath, fragmentShaderPath){
+    Triangle(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape)
+            : Shape(col, tex, inf, infSize, sizeNextVertex, posFirstVertex,sizeNextColor, posFirstColor,sizeNextTex,posFirstTex,layoutPos,layoutColor,layoutText, shape){
         this->initGLBuffers();
     }
     void initGLBuffers();

@@ -8,6 +8,7 @@
 #include "Shape.h"
 #include "Triangle.h"
 #include "Rectangle.h"
+#include "stb_image.h"
 #include <iostream>
 
 #ifndef GAMEENGINE_WINDOW_H
@@ -38,11 +39,21 @@ float vertices[] = {
         -1.0f,  0.0f, 0.0f, 1.0f, 1.0f, 1.0f   // top left
 };
 
+float vertices2[] = {
+        // positions          // colors           // texture coords
+        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left
+};
+
 //Rectangle indexes --> Tutorial
 int indices[] = {  // note that we start from 0!
         0, 1, 3,   // first triangle
         1, 2, 3    // second triangle
 };
+
+
 
 GLFWwindow * CreateWindow();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);

@@ -4,27 +4,19 @@
 
 #include "Shape.h"
 
-
-Shape::Shape(float * inf, int infSize, int sizeNextVertex, int posFirstVertex, const char *vertexShaderPath, const char *fragmentShaderPath) {
-    this->shader  = new Shader(vertexShaderPath,fragmentShaderPath);
+Shape::Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape){
+    this->shader  = shape;
     this->information = inf;
     this->size = infSize;
     this->sizeForNextVertex = sizeNextVertex;
     this->posForFirstVertex = posFirstVertex;
-    this->layoutLocationVertex = 0;
-    this->colored = false;
-}
-
-Shape::Shape(float *inf, int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor,
-             const char *vertexShaderPath, const char *fragmentShaderPath) {
-    this->shader  = new Shader(vertexShaderPath,fragmentShaderPath);
-    this->information = inf;
-    this->size = infSize;
-    this->sizeForNextVertex = sizeNextVertex;
-    this->posForFirstVertex = posFirstVertex;
-    this->layoutLocationVertex = 0;
-    this->colored = true;
+    this->layoutLocationVertex = layoutPos;
+    this->colored = col;
+    this->textured = tex;
     this->sizeForNextColor = sizeNextColor;
     this->posForFirstColor = posFirstColor;
-    this->layoutLocationColor = 1;
+    this->layoutLocationColor = layoutColor;
+    this->sizeForNextTex = sizeNextTex;
+    this->posForFirstTex = posFirstTex;
+    this->layoutLocationTex = layoutText;
 }

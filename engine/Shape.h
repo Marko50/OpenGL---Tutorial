@@ -18,15 +18,22 @@ protected:
     int posForFirstVertex;
     int layoutLocationVertex;
     bool colored;
+    bool textured;
     int sizeForNextColor;
     int posForFirstColor;
     int layoutLocationColor;
+    int layoutLocationTex;
+    int sizeForNextTex;
+    int posForFirstTex;
 public:
-    Shape(float inf[], int infSize, int sizeNextVertex, int posFirstVertex, const char * vertexShaderPath, const char * fragmentShaderPath);
-    Shape(float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor,const char * vertexShaderPath, const char * fragmentShaderPath);
+    Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape);
     virtual  void initGLBuffers() = 0;
     virtual void draw() = 0;
-    ~Shape(){delete shader;};
+    ~Shape(){
+        delete shader;
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+    };
 };
 
 #endif //GAMEENGINE_SHAPE_H

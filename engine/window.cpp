@@ -59,11 +59,12 @@ int main(){
         return -1;
     }
     unsigned  int numOfShapes = 3;
-    Triangle * triangle = new Triangle(vertices5, sizeof(vertices5), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), "files/vertexShader", "files/fragmentShader");
-    Triangle * triangle2 = new Triangle(vertices4, sizeof(vertices4), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), "files/vertexShader", "files/fragmentShader");
-    Rectangle * rectangle = new Rectangle(sizeof(indices), indices, vertices, sizeof(vertices), 6 * sizeof(float), 0, 6*sizeof(float), 3* sizeof(float), "files/vertexShader", "files/fragmentShader");
-    Shape* shapes[numOfShapes] = {triangle, triangle2, rectangle};
-    renderLoop(window,numOfShapes,shapes);
+    Shader * shader = new Shader("files/vertexShader", "files/fragmentShader");
+    //Triangle * triangle = new Triangle(vertices5, sizeof(vertices5), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), shader);
+    //Triangle * triangle2 = new Triangle(vertices4, sizeof(vertices4), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), shader);
+    //Rectangle * rectangle = new Rectangle(sizeof(indices), indices, vertices, sizeof(vertices), 6 * sizeof(float), 0, 6*sizeof(float), 3* sizeof(float), shader);
+    //Shape* shapes[numOfShapes] = {triangle, triangle2, rectangle};
+    //renderLoop(window,numOfShapes,shapes);
     glfwTerminate();
     return 0;
 }

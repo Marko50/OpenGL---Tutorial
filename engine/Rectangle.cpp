@@ -28,6 +28,7 @@ void Rectangle::initGLBuffers() {
         glEnableVertexAttribArray(this->layoutLocationColor);
     }
 
+
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -40,6 +41,7 @@ void Rectangle::initGLBuffers() {
 }
 
 void Rectangle::draw() {
+
     glUseProgram(this->shader->ID);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

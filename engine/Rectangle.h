@@ -13,13 +13,8 @@ private:
     unsigned int EBO;
     int indSize;
 public:
-    Rectangle(int size, int *ind, float *inf, int infSize, int sizeNextVertex, int posFirstVertex, const char * vertexShaderPath, const char * fragmentShaderPath) : Shape(inf,infSize,sizeNextVertex,posFirstVertex, vertexShaderPath, fragmentShaderPath){
-        indices = ind;
-        this->indSize = size;
-        this->initGLBuffers();
-    }
-    Rectangle(int size, int * ind, float *inf, int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor,
-              const char *vertexShaderPath, const char *fragmentShaderPath) : Shape(inf,infSize, sizeNextVertex,posFirstVertex, sizeNextColor, posFirstColor, vertexShaderPath, fragmentShaderPath){
+    Rectangle(bool col, bool tex, float inf[],int * ind,  int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape)
+            : Shape(col, tex, inf, infSize, sizeNextVertex, posFirstVertex,sizeNextColor, posFirstColor,sizeNextTex,posFirstTex,layoutPos,layoutColor,layoutText, shape){
         indices = ind;
         this->indSize = size;
         this->initGLBuffers();
