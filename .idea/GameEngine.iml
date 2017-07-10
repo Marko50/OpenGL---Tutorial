@@ -39,6 +39,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/xkb_unicode.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Texture.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Triangle.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/Texture.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/stb_image.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Rectangle.cpp" isTestSource="false" />

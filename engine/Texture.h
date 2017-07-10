@@ -5,14 +5,22 @@
 #ifndef GAMEENGINE_TEXTURE_H
 #define GAMEENGINE_TEXTURE_H
 
-#include "window.h"
+#include "../deps/glad/glad.h"
+#include "stb_image.h"
+#include <iostream>
+
+
+
+
 
 class Texture{
 private:
-    int texture,width,height,nrChannels;
-    unsigned  char * data;
+    unsigned int texture;
+    int width,height,nrChannels, textureUnit;
 public:
-    Texture();
+    Texture(const char * pathToTexture,int WRAP_S, int WRAP_T, int FILTER_MIN, int FILTER_MAG, int texUnit);
+    unsigned int getTexture();
+    int getTextureUnit();
 
 };
 

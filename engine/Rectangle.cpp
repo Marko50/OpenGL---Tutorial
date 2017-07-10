@@ -6,7 +6,7 @@
 
 //Rectangle vertices --> Tutorial
 
-void Rectangle::initGLBuffers() {
+void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *> uniformName) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -28,6 +28,10 @@ void Rectangle::initGLBuffers() {
         glEnableVertexAttribArray(this->layoutLocationColor);
     }
 
+    if(this->textured){
+        glVertexAttribPointer(this->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, this->sizeForNextTex, (void *) this->posForFirstTex);
+        glEnableVertexAttribArray(this->layoutLocationTex);
+    }
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -38,9 +42,18 @@ void Rectangle::initGLBuffers() {
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
+
+    glUseProgram(this->shader->ID);
+    for(unsigned int i = 0; i < uniformName.size(); i++){
+        this->shader->setInt(uniformName[i], tCount[i]);
+    }
 }
 
 void Rectangle::draw() {
+    for(unsigned int i = 0; i < this->textures.size(); i++){
+        glActiveTexture(this->textures[i]->getTextureUnit());
+        glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
+    }
 
     glUseProgram(this->shader->ID);
     glBindVertexArray(VAO);

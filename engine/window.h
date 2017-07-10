@@ -8,8 +8,9 @@
 #include "Shape.h"
 #include "Triangle.h"
 #include "Rectangle.h"
-#include "stb_image.h"
+#include "Texture.h"
 #include <iostream>
+#include <vector>
 
 #ifndef GAMEENGINE_WINDOW_H
 #define GAMEENGINE_WINDOW_H

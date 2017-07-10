@@ -4,7 +4,7 @@
 
 #include "Shape.h"
 
-Shape::Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape){
+Shape::Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape,std::vector<Texture*> text){
     this->shader  = shape;
     this->information = inf;
     this->size = infSize;
@@ -19,4 +19,5 @@ Shape::Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, i
     this->sizeForNextTex = sizeNextTex;
     this->posForFirstTex = posFirstTex;
     this->layoutLocationTex = layoutText;
+    this->textures = text;
 }

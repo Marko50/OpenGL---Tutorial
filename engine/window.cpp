@@ -58,13 +58,22 @@ int main(){
         std::cout<<"Failed to create GLF window" << std::endl;
         return -1;
     }
-    unsigned  int numOfShapes = 3;
+    unsigned  int numOfShapes = 1;
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader");
-    //Triangle * triangle = new Triangle(vertices5, sizeof(vertices5), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), shader);
-    //Triangle * triangle2 = new Triangle(vertices4, sizeof(vertices4), 6 * sizeof(float), 0, 6 *sizeof(float), 3 * sizeof(float), shader);
-    //Rectangle * rectangle = new Rectangle(sizeof(indices), indices, vertices, sizeof(vertices), 6 * sizeof(float), 0, 6*sizeof(float), 3* sizeof(float), shader);
-    //Shape* shapes[numOfShapes] = {triangle, triangle2, rectangle};
-    //renderLoop(window,numOfShapes,shapes);
+    std::vector<Texture *> textures;
+    std::vector<int> tCount;
+    std::vector<const char *> uniformNames;
+    Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
+    //Texture * texture2 = new Texture("assets/awesomeface.png",GL_REPEAT,GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
+    textures.push_back(texture);
+    //textures.push_back(texture2);
+    tCount.push_back(0);
+    //tCount.push_back(1);
+    uniformNames.push_back("ourTexture1");
+    //uniformNames.push_back("ourTexture2");
+    Rectangle * rectangle= new Rectangle(true, true, vertices2,indices, sizeof(vertices2), 8 * sizeof(float), 0, 8 * sizeof(float), 3 * sizeof(float), 8 * sizeof(float), 6 * sizeof(float), 0, 1, 2, shader, textures, tCount , uniformNames);
+    Shape* shapes[numOfShapes] = {rectangle};
+    renderLoop(window,numOfShapes,shapes);
     glfwTerminate();
     return 0;
 }
