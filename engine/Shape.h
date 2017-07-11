@@ -9,6 +9,33 @@
 #include "Texture.h"
 #include <vector>
 
+
+struct vertexArgs{
+    float * inf;
+    int * ind;
+    int infSize;
+    int sizeNextVertex;
+    int posFirstVertex;
+    int layoutPos;
+};
+
+struct colArgs{
+    bool col;
+    int sizeNextColor;
+    int posFirstColor;
+    int layoutColor;
+};
+
+struct texArgs{
+    bool tex;
+    int sizeNextTex;
+    int posFirstTex;
+    int layoutText;
+    std::vector<int> textureCount;
+    std::vector<const char *> uniformName;
+    std:: vector<Texture * > text;
+};
+
 class Shape{
 protected:
     unsigned int VAO;
@@ -29,7 +56,7 @@ protected:
     int sizeForNextTex;
     int posForFirstTex;
 public:
-    Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape, std::vector<Texture*> text);
+    Shape(vertexArgs va, colArgs ca, texArgs ta, Shader* shader);
     virtual  void initGLBuffers(std::vector<int> textureCount, std::vector<const char *> uniformName) = 0;
     virtual void draw() = 0;
     ~Shape(){

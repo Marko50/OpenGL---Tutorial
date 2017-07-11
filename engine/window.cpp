@@ -4,6 +4,55 @@
 
 #include "window.h"
 
+vertexArgs createVertexArgs(  float * inf,
+                              int * ind,
+                              int infSize,
+                              int sizeNextVertex,
+                              int posFirstVertex,
+                              int layoutPos){
+    vertexArgs va;
+    va.inf = inf;
+    va.ind = ind;
+    va.infSize = infSize;
+    va.sizeNextVertex = sizeNextVertex;
+    va.posFirstVertex = posFirstVertex;
+    va.layoutPos = layoutPos;
+
+    return va;
+}
+
+colArgs createColorArgs( bool col,
+                         int sizeNextColor,
+                         int posFirstColor,
+                         int layoutColor){
+    colArgs ca;
+    ca.col = col;
+    ca.sizeNextColor = sizeNextColor;
+    ca.posFirstColor = posFirstColor;
+    ca.layoutColor = layoutColor;
+
+    return ca;
+}
+
+texArgs createTexArgs(bool tex,
+                      int sizeNextTex,
+                      int posFirstTex,
+                      int layoutText,
+                      std::vector<int> textureCount,
+                      std::vector<const char *> uniformName,
+                      std:: vector<Texture * > text){
+
+    texArgs ta;
+    ta.tex = tex;
+    ta.sizeNextTex = sizeNextTex;
+    ta.posFirstTex = posFirstTex;
+    ta.layoutText = layoutText;
+    ta.textureCount = textureCount;
+    ta.uniformName = uniformName;
+    ta.text = text;
+
+    return ta;
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0,width,height);
@@ -64,14 +113,17 @@ int main(){
     std::vector<int> tCount;
     std::vector<const char *> uniformNames;
     Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
-    //Texture * texture2 = new Texture("assets/awesomeface.png",GL_REPEAT,GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
+    Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
     textures.push_back(texture);
-    //textures.push_back(texture2);
+    textures.push_back(texture2);
     tCount.push_back(0);
-    //tCount.push_back(1);
+    tCount.push_back(1);
     uniformNames.push_back("ourTexture1");
-    //uniformNames.push_back("ourTexture2");
-    Rectangle * rectangle= new Rectangle(true, true, vertices2,indices, sizeof(vertices2), 8 * sizeof(float), 0, 8 * sizeof(float), 3 * sizeof(float), 8 * sizeof(float), 6 * sizeof(float), 0, 1, 2, shader, textures, tCount , uniformNames);
+    uniformNames.push_back("ourTexture2");
+    texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float), 2, tCount, uniformNames, textures);
+    colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float),1);
+    vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,0);
+    Rectangle * rectangle= new Rectangle(va,ca,ta,shader);
     Shape* shapes[numOfShapes] = {rectangle};
     renderLoop(window,numOfShapes,shapes);
     glfwTerminate();

@@ -4,7 +4,6 @@
 
 #include "Rectangle.h"
 
-//Rectangle vertices --> Tutorial
 
 void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *> uniformName) {
     glGenVertexArrays(1, &VAO);

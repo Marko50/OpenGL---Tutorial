@@ -4,20 +4,20 @@
 
 #include "Shape.h"
 
-Shape::Shape(bool col, bool tex, float inf[], int infSize, int sizeNextVertex, int posFirstVertex, int sizeNextColor, int posFirstColor, int sizeNextTex, int posFirstTex, int layoutPos, int layoutColor, int layoutText, Shader* shape,std::vector<Texture*> text){
-    this->shader  = shape;
-    this->information = inf;
-    this->size = infSize;
-    this->sizeForNextVertex = sizeNextVertex;
-    this->posForFirstVertex = posFirstVertex;
-    this->layoutLocationVertex = layoutPos;
-    this->colored = col;
-    this->textured = tex;
-    this->sizeForNextColor = sizeNextColor;
-    this->posForFirstColor = posFirstColor;
-    this->layoutLocationColor = layoutColor;
-    this->sizeForNextTex = sizeNextTex;
-    this->posForFirstTex = posFirstTex;
-    this->layoutLocationTex = layoutText;
-    this->textures = text;
+Shape::Shape(vertexArgs va, colArgs ca, texArgs ta, Shader* shad){
+    this->shader  = shad;
+    this->information = va.inf;
+    this->size = va.infSize;
+    this->sizeForNextVertex = va.sizeNextVertex;
+    this->posForFirstVertex = va.posFirstVertex;
+    this->layoutLocationVertex = va.layoutPos;
+    this->colored = ca.col;
+    this->sizeForNextColor = ca.sizeNextColor;
+    this->posForFirstColor = ca.posFirstColor;
+    this->layoutLocationColor = ca.layoutColor;
+    this->textured = ta.tex;
+    this->sizeForNextTex = ta.sizeNextTex;
+    this->posForFirstTex = ta.posFirstTex;
+    this->layoutLocationTex = ta.layoutText;
+    this->textures = ta.text;
 }
