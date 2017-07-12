@@ -7,6 +7,9 @@
 
 #include "shader.h"
 #include "Texture.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
 
@@ -59,6 +62,9 @@ public:
     Shape(vertexArgs va, colArgs ca, texArgs ta, Shader* shader);
     virtual  void initGLBuffers(std::vector<int> textureCount, std::vector<const char *> uniformName) = 0;
     virtual void draw() = 0;
+    void rotate(bool x, bool y, bool z, float degrees, const char * uniformTransf);
+    void translate(float x, float y, float z, const char * uniformTransf);
+    void scale(float x, float y, float z, const char * uniformTransf);
     ~Shape(){
         delete shader;
         glDeleteVertexArrays(1, &VAO);

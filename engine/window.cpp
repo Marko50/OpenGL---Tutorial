@@ -74,6 +74,8 @@ void renderLoop(GLFWwindow* window, unsigned int c, Shape* shapes[]){
         for(int i = 0; i < c; i ++){
             shapes[i]->draw();
         }
+        shapes[0]->rotate(false,true,false,50 * (float) glfwGetTime(), "transform");
+       /// shapes[0]->rotate(true,false,false,50 * (float) glfwGetTime(), "transform");
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -107,8 +109,9 @@ int main(){
         std::cout<<"Failed to create GLF window" << std::endl;
         return -1;
     }
-    unsigned  int numOfShapes = 1;
+    unsigned  int numOfShapes = 2;
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader");
+    Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader");
     std::vector<Texture *> textures;
     std::vector<int> tCount;
     std::vector<const char *> uniformNames;
@@ -118,13 +121,16 @@ int main(){
     textures.push_back(texture2);
     tCount.push_back(0);
     tCount.push_back(1);
+    uniformNames.push_back("transform");
     uniformNames.push_back("ourTexture1");
     uniformNames.push_back("ourTexture2");
     texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float), 2, tCount, uniformNames, textures);
     colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float),1);
     vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,0);
+    vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float),0,0);
+    Triangle* triangle = new Triangle(va2,ca,ta,shader2);
     Rectangle * rectangle= new Rectangle(va,ca,ta,shader);
-    Shape* shapes[numOfShapes] = {rectangle};
+    Shape* shapes[numOfShapes] = {triangle,rectangle};
     renderLoop(window,numOfShapes,shapes);
     glfwTerminate();
     return 0;

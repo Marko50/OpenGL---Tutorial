@@ -11,7 +11,9 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
+#include <glm/detail/type_mat.hpp>
+#include <glm/detail/type_mat4x4.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader
 {
@@ -29,6 +31,7 @@ public:
     void setBool(const std::string &name, bool value) const;
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
+    void setMatrix4fv(const std::string &name, glm::mat4 trans);
 };
 
 #endif //GAMEENGINE_SHADER_H

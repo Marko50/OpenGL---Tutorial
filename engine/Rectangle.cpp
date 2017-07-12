@@ -41,9 +41,11 @@ void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
-
     glUseProgram(this->shader->ID);
-    for(unsigned int i = 0; i < uniformName.size(); i++){
+    this->translate(0,0,0, uniformName[0]);
+    this->rotate(false,false,false,0.0f,uniformName[0]);
+    this->scale(1,1,1,uniformName[0]);
+    for(unsigned int i = 1; i < uniformName.size(); i++){
         this->shader->setInt(uniformName[i], tCount[i]);
     }
 }

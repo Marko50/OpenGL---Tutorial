@@ -35,9 +35,11 @@ void Triangle ::initGLBuffers(std::vector<int> textureCount, std::vector<const c
     //unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-
     glUseProgram(this->shader->ID);
-    for(int i = 0; i < uniformName.size(); i++){
+    this->translate(0,0,0, uniformName[0]);
+    this->rotate(false,false,false,0.0f,uniformName[0]);
+    this->scale(1,1,1,uniformName[0]);
+    for(int i = 1; i < uniformName.size(); i++){
         this->shader->setInt(uniformName[i], textureCount[i]);
     }
 
