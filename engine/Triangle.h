@@ -13,10 +13,10 @@ private:
 
 public:
     Triangle(vertexArgs va, colArgs ca, texArgs ta, Shader* shader)
-            : Shape(va, ca,ta,shader){
-        this->initGLBuffers(ta.textureCount, ta.uniformName);
+            : Shape(ta,shader){
+        this->initGLBuffers(va,ca,ta);
     }
-    void initGLBuffers(std::vector<int> textureCount, std::vector<const char *> uniformName);
+    void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta);
     void draw();
 };
 

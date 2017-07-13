@@ -5,7 +5,7 @@
 #include "Rectangle.h"
 
 
-void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *> uniformName) {
+void Rectangle::initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -13,23 +13,23 @@ void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, size, information, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, va.infSize, va.inf, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->indSize, indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, va.indSize, va.ind, GL_STATIC_DRAW);
 
     //position
-    glVertexAttribPointer(this->layoutLocationVertex, 3, GL_FLOAT, GL_FALSE, this->sizeForNextVertex, (void*) this->posForFirstVertex);
-    glEnableVertexAttribArray(this->layoutLocationVertex);
+    glVertexAttribPointer(this->shader->layoutLocationVertex, 3, GL_FLOAT, GL_FALSE, va.sizeNextVertex, (void*) va.posFirstVertex);
+    glEnableVertexAttribArray(this->shader->layoutLocationVertex);
 
-    if(this->colored){
-        glVertexAttribPointer(this->layoutLocationColor,3,GL_FLOAT,GL_FALSE, this->sizeForNextColor,(void *) this->posForFirstColor);
-        glEnableVertexAttribArray(this->layoutLocationColor);
+    if(ca.col){
+        glVertexAttribPointer(this->shader->layoutLocationColor,3,GL_FLOAT,GL_FALSE, ca.sizeNextColor,(void *) ca.posFirstColor);
+        glEnableVertexAttribArray(this->shader->layoutLocationColor);
     }
 
-    if(this->textured){
-        glVertexAttribPointer(this->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, this->sizeForNextTex, (void *) this->posForFirstTex);
-        glEnableVertexAttribArray(this->layoutLocationTex);
+    if(ta.tex){
+        glVertexAttribPointer(this->shader->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, ta.sizeNextTex, (void *) ta.posFirstTex);
+        glEnableVertexAttribArray(this->shader->layoutLocationTex);
     }
 
     // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
@@ -42,21 +42,16 @@ void Rectangle::initGLBuffers(std::vector<int> tCount , std::vector<const char *
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
     glUseProgram(this->shader->ID);
-    this->translate(0,0,0, uniformName[0]);
-    this->rotate(false,false,false,0.0f,uniformName[0]);
-    this->scale(1,1,1,uniformName[0]);
-    for(unsigned int i = 1; i < uniformName.size(); i++){
-        this->shader->setInt(uniformName[i], tCount[i]);
-    }
 }
 
 void Rectangle::draw() {
+    glUseProgram(this->shader->ID);
+    this->translate(0,0,0,"transform");
+    this->changeColor(0,0,1,1);
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
     }
-
-    glUseProgram(this->shader->ID);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

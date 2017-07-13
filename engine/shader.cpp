@@ -43,7 +43,11 @@ void Shader::setMatrix4fv(const std::string &name, glm::mat4 trans) {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(trans));
 }
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+void Shader::set4f(const std::string &name,  float  R, float  G, float  B, float  O) {
+    glUniform4f(glGetUniformLocation(ID, name.c_str()), R,G,B,O);
+}
+
+Shader::Shader(const char* vertexPath, const char* fragmentPath, shaderArgs sa)
 {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -98,4 +102,9 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+
+    this->layoutLocationVertex = sa.layoutLocationVertex;
+    this->layoutLocationColor = sa.layoutLocationColor;
+    this->layoutLocationTex = sa.layoutLocationTex;
+
 }

@@ -4,51 +4,50 @@
 
 #include "window.h"
 
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex){
+    shaderArgs sa;
+    sa.layoutLocationVertex = lposVer;
+    sa.layoutLocationColor = lPosColor;
+    sa.layoutLocationTex = lPosTex;
+    return  sa;
+}
+
 vertexArgs createVertexArgs(  float * inf,
                               int * ind,
                               int infSize,
                               int sizeNextVertex,
                               int posFirstVertex,
-                              int layoutPos){
+                              int indSize){
     vertexArgs va;
     va.inf = inf;
     va.ind = ind;
     va.infSize = infSize;
     va.sizeNextVertex = sizeNextVertex;
     va.posFirstVertex = posFirstVertex;
-    va.layoutPos = layoutPos;
+    va.indSize = indSize;
 
     return va;
 }
 
 colArgs createColorArgs( bool col,
                          int sizeNextColor,
-                         int posFirstColor,
-                         int layoutColor){
+                         int posFirstColor){
     colArgs ca;
     ca.col = col;
     ca.sizeNextColor = sizeNextColor;
     ca.posFirstColor = posFirstColor;
-    ca.layoutColor = layoutColor;
-
     return ca;
 }
 
 texArgs createTexArgs(bool tex,
                       int sizeNextTex,
                       int posFirstTex,
-                      int layoutText,
-                      std::vector<int> textureCount,
-                      std::vector<const char *> uniformName,
                       std:: vector<Texture * > text){
 
     texArgs ta;
     ta.tex = tex;
     ta.sizeNextTex = sizeNextTex;
     ta.posFirstTex = posFirstTex;
-    ta.layoutText = layoutText;
-    ta.textureCount = textureCount;
-    ta.uniformName = uniformName;
     ta.text = text;
 
     return ta;
@@ -74,8 +73,6 @@ void renderLoop(GLFWwindow* window, unsigned int c, Shape* shapes[]){
         for(int i = 0; i < c; i ++){
             shapes[i]->draw();
         }
-        shapes[0]->rotate(false,true,false,50 * (float) glfwGetTime(), "transform");
-       /// shapes[0]->rotate(true,false,false,50 * (float) glfwGetTime(), "transform");
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
@@ -110,27 +107,21 @@ int main(){
         return -1;
     }
     unsigned  int numOfShapes = 2;
-    Shader * shader = new Shader("files/vertexShader", "files/fragmentShader");
-    Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader");
+    shaderArgs sa = createShaderArgs(0,1,2);
+    Shader * shader = new Shader("files/vertexShader", "files/fragmentShader",sa);
+    Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader", sa);
     std::vector<Texture *> textures;
-    std::vector<int> tCount;
-    std::vector<const char *> uniformNames;
     Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
     Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
     textures.push_back(texture);
     textures.push_back(texture2);
-    tCount.push_back(0);
-    tCount.push_back(1);
-    uniformNames.push_back("transform");
-    uniformNames.push_back("ourTexture1");
-    uniformNames.push_back("ourTexture2");
-    texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float), 2, tCount, uniformNames, textures);
-    colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float),1);
-    vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,0);
-    vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float),0,0);
+    texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float),textures);
+    colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float));
+    vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,sizeof(indices));
+    vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float), 0, 0);
     Triangle* triangle = new Triangle(va2,ca,ta,shader2);
     Rectangle * rectangle= new Rectangle(va,ca,ta,shader);
-    Shape* shapes[numOfShapes] = {triangle,rectangle};
+    Shape* shapes[numOfShapes] = {rectangle,triangle};
     renderLoop(window,numOfShapes,shapes);
     glfwTerminate();
     return 0;

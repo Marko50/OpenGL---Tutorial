@@ -3,8 +3,6 @@
 //
 
 #include <math.h>
-#include "../deps/glad/glad.h"
-#include "../include/GLFW/glfw3.h"
 #include "Shape.h"
 #include "Triangle.h"
 #include "Rectangle.h"
@@ -50,19 +48,17 @@ void renderLoop(GLFWwindow* window, unsigned int c, Shape* shape[]);
 texArgs createTexArgs(bool tex,
                       int sizeNextTex,
                       int posFirstTex,
-                      int layoutText,
-                      std::vector<int> textureCount,
-                      std::vector<const char *> uniformName,
                       std:: vector<Texture * > text);
 
 colArgs createColorArgs( bool col,
                          int sizeNextColor,
-                         int posFirstColor,
-                         int layoutColor);
+                         int posFirstColor);
 
 vertexArgs createVertexArgs(  float * inf,
                               int * ind,
                               int infSize,
                               int sizeNextVertex,
                               int posFirstVertex,
-                              int layoutPos);
+                              int indSize);
+
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex);
