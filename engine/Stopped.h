@@ -6,7 +6,13 @@
 #define GAMEENGINE_STOPPED_H
 
 
-class Stopped {
+#include "State.h"
+
+class Stopped : public State {
+
+public:
+    Stopped(const char * u);
+    void action(unsigned int ID);
 
 };
 

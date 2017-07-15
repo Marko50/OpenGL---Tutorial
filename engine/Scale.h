@@ -6,8 +6,15 @@
 #define GAMEENGINE_SCALE_H
 
 
-class Scale {
+#include "State.h"
 
+class Scale : public State {
+    float x;
+    float y;
+    float z;
+public:
+    Scale(const char * u, float x, float y, float z);
+    void action(unsigned int ID);
 };
 
 

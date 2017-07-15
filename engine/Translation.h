@@ -6,7 +6,15 @@
 #define GAMEENGINE_TRANSLATION_H
 
 
-class Translation {
+#include "State.h"
+
+class Translation : public State {
+    float x;
+    float y;
+    float z;
+public:
+    Translation(const char * u, float x, float y, float z);
+    void action(unsigned int ID);
 
 };
 

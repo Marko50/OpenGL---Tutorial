@@ -6,8 +6,16 @@
 #define GAMEENGINE_ROTATION_H
 
 
-class Rotation {
+#include "State.h"
 
+class Rotation : public State {
+    bool x;
+    bool y;
+    bool z;
+    float degrees;
+public:
+    Rotation(const char * u, bool x, bool y, bool z, float degrees);
+    void action(unsigned int ID);
 };
 
 

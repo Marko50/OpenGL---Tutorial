@@ -107,6 +107,7 @@ int main(){
         return -1;
     }
     unsigned  int numOfShapes = 2;
+    State* state = new Stopped("transform");
     shaderArgs sa = createShaderArgs(0,1,2);
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader",sa);
     Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader", sa);
@@ -119,8 +120,8 @@ int main(){
     colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float));
     vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,sizeof(indices));
     vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float), 0, 0);
-    Triangle* triangle = new Triangle(va2,ca,ta,shader2);
-    Rectangle * rectangle= new Rectangle(va,ca,ta,shader);
+    vbo* triangle = new vbo(va2,ca,ta,shader2,state);
+    ebo * rectangle= new ebo(va,ca,ta,shader,state);
     Shape* shapes[numOfShapes] = {rectangle,triangle};
     renderLoop(window,numOfShapes,shapes);
     glfwTerminate();

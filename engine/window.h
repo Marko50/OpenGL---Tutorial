@@ -4,9 +4,14 @@
 
 #include <math.h>
 #include "Shape.h"
-#include "Triangle.h"
-#include "Rectangle.h"
+#include "vbo.h"
+#include "ebo.h"
 #include "Texture.h"
+#include "State.h"
+#include "Stopped.h"
+#include "Rotation.h"
+#include "Translation.h"
+#include "Scale.h"
 #include <iostream>
 #include <vector>
 

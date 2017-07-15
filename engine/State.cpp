@@ -3,3 +3,7 @@
 //
 
 #include "State.h"
+
+State::State(const char *u) {
+    this->uniformTransf = u;
+}
