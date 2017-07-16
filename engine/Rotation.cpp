@@ -13,6 +13,7 @@ Rotation::Rotation(const char *u, bool x, bool y, bool z, float degrees) : State
 }
 
 void Rotation::action(unsigned int ID) {
+    this->degrees = 30 * (float)glfwGetTime();
     glUseProgram(ID);
     glm::mat4 trans;
     trans = glm::rotate(trans,glm::radians(this->degrees),glm::vec3((int)x, int(y),(int)z));

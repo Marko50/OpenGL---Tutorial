@@ -12,9 +12,10 @@ Translation::Translation(const char *u, float x, float y, float z) : State(u) {
 }
 
 void Translation::action(unsigned int ID) {
+    float time = (float) glfwGetTime();
     glUseProgram(ID);
     glm::mat4 trans;
-    trans = glm::translate(trans, glm::vec3(x,y,z));
+    trans = glm::translate(trans, glm::vec3(x*time,y*time,z*time));
     unsigned int transformLoc = glGetUniformLocation(ID,uniformTransf);
     glUniformMatrix4fv(transformLoc,1,GL_FALSE,glm::value_ptr(trans));
 }

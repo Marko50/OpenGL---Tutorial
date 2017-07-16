@@ -44,12 +44,12 @@ void vbo ::initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) {
 void vbo::draw() {
     glUseProgram(this->shader->ID);
     this->updateCoordinates("model", "view", "projection");
-    this->changeColor(1.0f,0.0f,1.0f, 1.0f, "color");
     this->state->action(this->shader->ID);
+    this->changeColor(1.0f,0.0f,1.0f, 1.0f, "color");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
     }
     glBindVertexArray(this->VAO);
-    glDrawArrays(GL_TRIANGLES, 0,3);
+    glDrawArrays(GL_TRIANGLES, 0,this->numOfVert);
 }

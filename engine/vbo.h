@@ -13,7 +13,7 @@ private:
 
 public:
     vbo(vertexArgs va, colArgs ca, texArgs ta, Shader* shader,State* st)
-            : Shape(ta,shader,st){
+            : Shape(va,ta,shader,st){
         this->initGLBuffers(va,ca,ta);
     }
     void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta);

@@ -17,7 +17,8 @@ vertexArgs createVertexArgs(  float * inf,
                               int infSize,
                               int sizeNextVertex,
                               int posFirstVertex,
-                              int indSize){
+                              int indSize,
+                              int numOfVert){
     vertexArgs va;
     va.inf = inf;
     va.ind = ind;
@@ -25,7 +26,7 @@ vertexArgs createVertexArgs(  float * inf,
     va.sizeNextVertex = sizeNextVertex;
     va.posFirstVertex = posFirstVertex;
     va.indSize = indSize;
-
+    va.numOfVert = numOfVert;
     return va;
 }
 
@@ -69,7 +70,7 @@ void renderLoop(GLFWwindow* window, unsigned int c, Shape* shapes[]){
         processInput(window);
         //render commands
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
         for(int i = 0; i < c; i ++){
             shapes[i]->draw();
         }
@@ -96,6 +97,7 @@ GLFWwindow * CreateWindow(){
         std::cout<<"Failed to initialize GLAD!" << std::endl;
         return NULL;
     }
+    glEnable(GL_DEPTH_TEST);
     return window;
 }
 
@@ -106,8 +108,11 @@ int main(){
         std::cout<<"Failed to create GLF window" << std::endl;
         return -1;
     }
-    unsigned  int numOfShapes = 2;
+    unsigned  int numOfShapes = 1;
+    State * scaling = new Scale("transform", 1.0,0.9,1.0);
+    State* translating = new Translation("transform", 0.5,0,0);
     State* state = new Stopped("transform");
+    State * rotating = new Rotation("transform",true,true,true,50*(float)glfwGetTime());
     shaderArgs sa = createShaderArgs(0,1,2);
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader",sa);
     Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader", sa);
@@ -118,11 +123,16 @@ int main(){
     textures.push_back(texture2);
     texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float),textures);
     colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float));
-    vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,sizeof(indices));
-    vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float), 0, 0);
-    vbo* triangle = new vbo(va2,ca,ta,shader2,state);
+    colArgs ca2 = createColorArgs(false, 0,0);
+    vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,sizeof(indices),6);
+    vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float), 0, 0,3);
+    vertexArgs va3 = createVertexArgs(vertices, NULL, sizeof(vertices), 5*sizeof(float),0, 0, 36);
+    texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
+    vbo * cube = new vbo(va3, ca2, ta2, shader, scaling);
+    vbo* triangle = new vbo(va2,ca,ta,shader2,rotating);
     ebo * rectangle= new ebo(va,ca,ta,shader,state);
-    Shape* shapes[numOfShapes] = {rectangle,triangle};
+    cube->layDown();
+    Shape* shapes[numOfShapes] = {cube};
     renderLoop(window,numOfShapes,shapes);
     glfwTerminate();
     return 0;

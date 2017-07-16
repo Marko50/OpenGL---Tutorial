@@ -15,7 +15,6 @@ class Translation : public State {
 public:
     Translation(const char * u, float x, float y, float z);
     void action(unsigned int ID);
-
 };
 
 

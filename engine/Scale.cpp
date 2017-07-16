@@ -12,9 +12,10 @@ Scale::Scale(const char *u, float x, float y, float z) : State(u) {
 }
 
 void Scale::action(unsigned int ID) {
+    float time = (float)glfwGetTime();
     glUseProgram(ID);
     glm::mat4 trans;
-    trans = glm::scale(trans, glm::vec3(x,y,z));
+    trans = glm::scale(trans, glm::vec3(x*time,y*time,z*time));
     unsigned int transformLoc = glGetUniformLocation(ID,uniformTransf);
     glUniformMatrix4fv(transformLoc,1,GL_FALSE,glm::value_ptr(trans));
 }

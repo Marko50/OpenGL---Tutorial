@@ -18,6 +18,7 @@ struct vertexArgs{
     int infSize;
     int sizeNextVertex;
     int posFirstVertex;
+    int numOfVert;
 };
 
 struct colArgs{
@@ -35,6 +36,7 @@ struct texArgs{
 
 class Shape{
 protected:
+    int numOfVert;
     unsigned int VAO;
     unsigned int VBO;
     State * state;
@@ -45,11 +47,12 @@ protected:
     glm::mat4 p;
 
 public:
-    Shape(texArgs ta, Shader* shader, State * st);
+    Shape(vertexArgs va, texArgs ta, Shader* shader, State * st);
     virtual  void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) = 0;
     virtual void draw() = 0;
     void updateCoordinates(const char * model, const char * view,const char * projection);
     void changeColor(float R, float G, float B, float O, const char * uniformName);
+    void layDown();
     ~Shape(){
         delete shader;
         glDeleteVertexArrays(1, &VAO);
@@ -78,6 +81,11 @@ public:
     void setP(const glm::mat4 &p) {
         Shape::p = p;
     }
+
+    void setState(State *state) {
+        Shape::state = state;
+    }
+
 };
 
 #endif //GAMEENGINE_SHAPE_H

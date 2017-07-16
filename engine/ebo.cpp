@@ -54,5 +54,5 @@ void ebo::draw() {
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
     }
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, this->numOfVert, GL_UNSIGNED_INT, 0);
 }
