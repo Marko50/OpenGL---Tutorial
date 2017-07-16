@@ -48,24 +48,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3004d491-4872-4180-a41f-b53b9d787d66" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/GameEngine.iml" afterPath="$PROJECT_DIR$/.idea/GameEngine.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Rotation.cpp" afterPath="$PROJECT_DIR$/engine/Rotation.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Scale.cpp" afterPath="$PROJECT_DIR$/engine/Scale.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Shape.cpp" afterPath="$PROJECT_DIR$/engine/Shape.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Shape.h" afterPath="$PROJECT_DIR$/engine/Shape.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Translation.cpp" afterPath="$PROJECT_DIR$/engine/Translation.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Translation.h" afterPath="$PROJECT_DIR$/engine/Translation.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/ebo.cpp" afterPath="$PROJECT_DIR$/engine/ebo.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/ebo.h" afterPath="$PROJECT_DIR$/engine/ebo.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/vbo.cpp" afterPath="$PROJECT_DIR$/engine/vbo.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/vbo.h" afterPath="$PROJECT_DIR$/engine/vbo.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/window.cpp" afterPath="$PROJECT_DIR$/engine/window.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/window.h" afterPath="$PROJECT_DIR$/engine/window.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/fragmentShader" afterPath="$PROJECT_DIR$/files/fragmentShader" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/vertexShader" afterPath="$PROJECT_DIR$/files/vertexShader" />
-    </list>
+    <list default="true" id="3004d491-4872-4180-a41f-b53b9d787d66" name="Default" comment="" />
     <ignored path="GameEngine.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,8 +71,8 @@
       <file leaf-file-name="window.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/engine/window.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-22">
-              <caret line="111" column="52" selection-start-line="111" selection-start-column="52" selection-end-line="111" selection-end-column="52" />
+            <state relative-caret-position="230">
+              <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -1074,8 +1057,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/engine/window.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-22">
-          <caret line="111" column="52" selection-start-line="111" selection-start-column="52" selection-end-line="111" selection-end-column="52" />
+        <state relative-caret-position="230">
+          <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
           <folding />
         </state>
       </provider>
