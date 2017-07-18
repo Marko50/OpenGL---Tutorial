@@ -12,8 +12,8 @@ class vbo: public Shape{
 private:
 
 public:
-    vbo(vertexArgs va, colArgs ca, texArgs ta, Shader* shader,State* st)
-            : Shape(va,ta,shader,st){
+    vbo(vertexArgs va, colArgs ca, texArgs ta, Shader* shader)
+            : Shape(va,ta,shader){
         this->initGLBuffers(va,ca,ta);
     }
     void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta);

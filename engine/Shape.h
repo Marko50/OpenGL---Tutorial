@@ -7,7 +7,6 @@
 
 #include "shader.h"
 #include "Texture.h"
-#include "State.h"
 #include <vector>
 
 
@@ -36,22 +35,28 @@ struct texArgs{
 
 class Shape{
 protected:
+    float x,y,z;
+    float sizex,sizey,sizez;
+    float degrees;
+    bool rotX,rotY,rotZ;
     int numOfVert;
     unsigned int VAO;
     unsigned int VBO;
-    State * state;
     Shader* shader;
     std::vector<Texture *> textures;
     glm::mat4 m;
     glm::mat4 v;
     glm::mat4 p;
-
 public:
-    Shape(vertexArgs va, texArgs ta, Shader* shader, State * st);
+    Shape(vertexArgs va, texArgs ta, Shader* shader);
     virtual  void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) = 0;
     virtual void draw() = 0;
+    void translate(float x, float y, float z);
+    void scale(float x, float y, float z);
+    void rotate(float degres, bool x, bool y, bool z);
     void updateCoordinates(const char * model, const char * view,const char * projection);
     void changeColor(float R, float G, float B, float O, const char * uniformName);
+    void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
     void layDown();
     ~Shape(){
         delete shader;
@@ -82,9 +87,37 @@ public:
         Shape::p = p;
     }
 
-    void setState(State *state) {
-        Shape::state = state;
+    float getX() const {
+        return x;
     }
+
+    float getY() const {
+        return y;
+    }
+
+    float getZ() const {
+        return z;
+    }
+
+    float getSizex() const {
+        return sizex;
+    }
+
+    float getSizey() const {
+        return sizey;
+    }
+
+    float getSizez() const {
+        return sizez;
+    }
+
+    float getDegrees() const {
+        return degrees;
+    }
+
+
+
+
 
 };
 

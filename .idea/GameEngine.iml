@@ -6,8 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/include/GLFW/glfw3native.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/include/GLFW/glfw3.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/deps/glad.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/deps/glad/glad.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/deps/KHR/khrplatform.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deps/glad/glad.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/init.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/linux_joystick.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/posix_thread.c" isTestSource="false" />
@@ -39,29 +39,20 @@
       <sourceFolder url="file://$MODULE_DIR$/src/xkb_unicode.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/ebo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Texture.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/shader.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Texture.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/vbo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Translation.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/shader.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/stb_image.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Scale.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Rotation.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/ebo.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/window.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Shape.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/Shape.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/ebo.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/State.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Translation.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Scale.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/shader.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/vbo.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/window.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Rotation.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/State.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/engine/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/engine/stb_image.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Stopped.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/vbo.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/engine/Stopped.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMake/modules/FindVulkan.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/cmake_uninstall.cmake.in" isTestSource="false" />
     </content>

@@ -11,8 +11,8 @@ class ebo: public Shape{
 private:
     unsigned int EBO;
 public:
-    ebo(vertexArgs va, colArgs ca, texArgs ta, Shader* shader, State* st)
-            : Shape(va, ta, shader,st){
+    ebo(vertexArgs va, colArgs ca, texArgs ta, Shader* shader)
+            : Shape(va, ta, shader){
 
         this->initGLBuffers(va,ca,ta);
     }
