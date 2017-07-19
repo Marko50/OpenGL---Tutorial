@@ -4,8 +4,40 @@
 
 #include "window.h"
 
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
+float xoffset = 0.0f;
+float yoffset = 0.0f;
+
+float yScroll = 0.0f;
+
+float lastX = 800 / 2.0f;
+float lastY = 600 / 2.0f;
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    yScroll = yoffset;
+}
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0,width,height);
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos){
+    static bool firstMouse = true;
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    xoffset = xpos - lastX;
+    yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
 }
 
 Window::Window(int height, int width) {
@@ -19,6 +51,11 @@ Window::Window(int height, int width) {
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
+
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     if(!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress))
     {
         std::cout<<"Failed to initialize GLAD!" << std::endl;
@@ -31,17 +68,31 @@ void Window::processInput() {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE)){
         glfwSetWindowShouldClose(window, true);
     }
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        this->camera->ProcessKeyboard(FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        this->camera->ProcessKeyboard(BACKWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        this->camera->ProcessKeyboard(LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        this->camera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
 void Window::renderLoop() {
     while(!glfwWindowShouldClose(window)){
+        float currentFrame = (float)glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
         //input
         this->processInput();
         //render commands
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
+        this->camera->ProcessMouseMovement(xoffset,yoffset);
+        this->camera->ProcessMouseScroll(yScroll);
         shapes[2]->rotate(50*(float)glfwGetTime(),true,false,false);
         for(int i = 0; i < shapes.size(); i ++){
+            this->camera->update(shapes[i]->shader->ID, "view", "projection");
             shapes[i]->draw();
         }
         glfwSwapBuffers(window);

@@ -44,7 +44,7 @@ void vbo ::initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) {
 void vbo::draw() {
     glUseProgram(this->shader->ID);
     this->updateTransform("transformTrans","transformRot","transformScale" );
-    this->updateCoordinates("model", "view", "projection");
+    this->updateCoordinates("model");
     this->changeColor(1.0f,0.0f,1.0f, 1.0f, "color");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());

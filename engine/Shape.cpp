@@ -11,17 +11,13 @@ Shape::Shape(vertexArgs va,texArgs ta, Shader* shad){
     this->numOfVert = va.numOfVert;
     this->shader  = shad;
     this->textures = ta.text;
-    this->m = glm::rotate(m, glm::radians(0.0f),glm::vec3(1.0f,0.0f,0.0f));
-    this->v = glm::translate(v, glm::vec3(0.0f,0.0f,-3.0f));
+    this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.0f,0.0f));
     //this->p = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
-    this->p = glm::perspective(glm::radians(45.0f), (float) 800 / (float) 600, 0.1f, 100.0f);
 }
 
 
-void Shape::updateCoordinates(const char *model, const char *view,const char *projection) {
+void Shape::updateCoordinates(const char *model) {
     this->shader->setMatrix4fv(model, m);
-    this->shader->setMatrix4fv(view, v);
-    this->shader->setMatrix4fv(projection, p);
 }
 
 void Shape::changeColor(float R, float G, float B, float O, const char *uniformName) {
@@ -61,6 +57,4 @@ void Shape::updateTransform(const char *uniformTrans, const char * uniformRot, c
 
 void Shape::layDown() {
     this->m = glm::rotate(m, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    this->v = glm::translate(v, glm::vec3(0.0f, 0.0f, -3.0f));
-    this->p = glm::perspective(glm::radians(45.0f), (float) 800 / (float) 600, 0.1f, 100.0f);
 }

@@ -117,6 +117,18 @@ public:
             Zoom = 45.0f;
     }
 
+    void update(int ID, const char * uniformViewName, const char * uniformProjection){
+        glm::mat4 v;
+        v = GetViewMatrix();
+        int local = glGetUniformLocation(ID,uniformViewName);
+        glUniformMatrix4fv(local,1,GL_FALSE, glm::value_ptr(v));
+
+        glm::mat4 p;
+        p = glm::perspective(glm::radians(this->Zoom), (float)800/(float)600, 0.1f,100.0f);
+        int local2 = glGetUniformLocation(ID,uniformProjection);
+        glUniformMatrix4fv(local2,1,GL_FALSE, glm::value_ptr(p));
+    }
+
 private:
     // Calculates the front vector from the Camera's (updated) Eular Angles
     void updateCameraVectors()

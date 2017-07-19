@@ -15,14 +15,11 @@
 #ifndef GAMEENGINE_WINDOW_H
 #define GAMEENGINE_WINDOW_H
 
-#endif //GAMEENGINE_WINDOW_H
-
-
 class Window{
 private:
     GLFWwindow * window;
-    Camera * camera;
     std::vector<Shape *> shapes;
+    Camera * camera;
 public:
     Window(int height, int width);
     void processInput();
@@ -35,3 +32,8 @@ public:
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+
+
+#endif //GAMEENGINE_WINDOW_H
