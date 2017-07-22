@@ -15,7 +15,7 @@
 
   void main()
   {
-    gl_Position =   transformScale * transformRot * transformTrans * projection * view * model * vec4(aPos.x, aPos.y, aPos.z, 1.0);
+    gl_Position =   projection * view * model * transformScale * transformRot * transformTrans * vec4(aPos.x, aPos.y, aPos.z, 1.0);
     ourColor = aColor;
     TexCoord = aTexCoord;
   }

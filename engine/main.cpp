@@ -65,8 +65,6 @@ int main(){
 
     shaderArgs sa = createShaderArgs(0,1,2);
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader",sa);
-    Shader * shader2 = new Shader("files/vertexShader", "files/fragmentShader", sa);
-    Shader * shader3 = new Shader("files/vertexShader", "files/fragmentShader", sa);
     std::vector<Texture *> textures;
     Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
     Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
@@ -81,9 +79,9 @@ int main(){
     texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
     vbo * cube = new vbo(va3, ca2, ta2, shader);
     cube->translate(-0.4,0,0);
-    vbo* triangle = new vbo(va2,ca,ta,shader2);
-    triangle->scale(0.5,0.5,1.0);
-    ebo * rectangle= new ebo(va,ca,ta,shader3);
+    vbo* triangle = new vbo(va2,ca,ta,shader);
+    triangle->scale(2.0,0.5,1.0);
+    ebo * rectangle= new ebo(va,ca,ta,shader);
     window.addShape(cube);
     window.addShape(triangle);
     window.addShape(rectangle);

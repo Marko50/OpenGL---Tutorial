@@ -11,7 +11,7 @@ Shape::Shape(vertexArgs va,texArgs ta, Shader* shad){
     this->numOfVert = va.numOfVert;
     this->shader  = shad;
     this->textures = ta.text;
-    this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.0f,0.0f));
+    this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.3f,0.5f));
     //this->p = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
 }
 

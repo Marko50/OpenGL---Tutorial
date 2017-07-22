@@ -15,6 +15,8 @@ float yScroll = 0.0f;
 float lastX = 800 / 2.0f;
 float lastY = 600 / 2.0f;
 
+bool firstMouse = true;
+
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     yScroll = yoffset;
@@ -25,7 +27,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height){
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos){
-    static bool firstMouse = true;
     if (firstMouse)
     {
         lastX = xpos;
@@ -61,20 +62,20 @@ Window::Window(int height, int width) {
         std::cout<<"Failed to initialize GLAD!" << std::endl;
     }
     glEnable(GL_DEPTH_TEST);
-    this->camera = new Camera();
+    this->camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 }
 
 void Window::processInput() {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE)){
         glfwSetWindowShouldClose(window, true);
     }
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         this->camera->ProcessKeyboard(FORWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         this->camera->ProcessKeyboard(BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         this->camera->ProcessKeyboard(LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         this->camera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
@@ -90,7 +91,7 @@ void Window::renderLoop() {
         glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
         this->camera->ProcessMouseMovement(xoffset,yoffset);
         this->camera->ProcessMouseScroll(yScroll);
-        shapes[2]->rotate(50*(float)glfwGetTime(),true,false,false);
+        //shapes[2]->rotate(50*(float)glfwGetTime(),true,false,false);
         for(int i = 0; i < shapes.size(); i ++){
             this->camera->update(shapes[i]->shader->ID, "view", "projection");
             shapes[i]->draw();
