@@ -5,7 +5,6 @@
 #include "lightVBO.h"
 
 void lightVBO::draw() {
-    glUseProgram(this->shader->ID);
     this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateColor("color");

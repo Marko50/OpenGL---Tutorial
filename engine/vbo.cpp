@@ -31,12 +31,9 @@ void vbo ::initGLBuffers(vertexArgs va, texArgs ta) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-
-    glUseProgram(this->shader->ID);
 }
 
 void vbo::draw() {
-    glUseProgram(this->shader->ID);
     this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateColor("color");

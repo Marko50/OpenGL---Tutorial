@@ -80,6 +80,7 @@ void Window::processInput() {
 }
 
 void Window::renderLoop() {
+    glUseProgram(Shape::shader->ID);
     while(!glfwWindowShouldClose(window)){
         float currentFrame = (float)glfwGetTime();
         deltaTime = currentFrame - lastFrame;

@@ -38,11 +38,9 @@ void ebo::initGLBuffers(vertexArgs va, texArgs ta) {
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
-    glUseProgram(this->shader->ID);
 }
 
 void ebo::draw() {
-    glUseProgram(this->shader->ID);
     this->updateTransform("transformTrans","transformRot","transformScale");
     this->updateCoordinates("model");
     this->updateColor("color");
