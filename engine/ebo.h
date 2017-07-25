@@ -11,11 +11,12 @@ class ebo: public Shape{
 private:
     unsigned int EBO;
 public:
-    ebo(vertexArgs va,  texArgs ta, Shader* shader,glm::vec4 c)
-            : Shape(va, ta, shader,c){
+    ebo(vertexArgs va,  texArgs ta, glm::vec4 c)
+            : Shape(va, ta, c){
 
         this->initGLBuffers(va,ta);
     }
+    void setAmbient(const char * uniformAmbient);
     void initGLBuffers(vertexArgs va, texArgs ta);
     void draw();
 };

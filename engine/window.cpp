@@ -91,7 +91,6 @@ void Window::renderLoop() {
         glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
         this->camera->ProcessMouseMovement(xoffset,yoffset);
         this->camera->ProcessMouseScroll(yScroll);
-        //shapes[2]->rotate(50*(float)glfwGetTime(),true,false,false);
         for(int i = 0; i < shapes.size(); i ++){
             this->camera->update(shapes[i]->shader->ID, "view", "projection");
             shapes[i]->draw();

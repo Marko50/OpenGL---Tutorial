@@ -4,16 +4,25 @@
 
 #include "Shape.h"
 
-Shape::Shape(vertexArgs va,texArgs ta, Shader* shad,glm::vec4 c){
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex){
+    shaderArgs sa;
+    sa.layoutLocationVertex = lposVer;
+    sa.layoutLocationColor = lPosColor;
+    sa.layoutLocationTex = lPosTex;
+    return  sa;
+}
+
+Shape::Shape(vertexArgs va,texArgs ta ,glm::vec4 c){
+    this->shader =  new Shader("files/vertexShader", "files/fragmentShader", createShaderArgs(0,1,2));
     this->color = c;
     this->scale(1,1,1);
     this->translate(0.0,0,0);
     this->rotate(0,true,true,true);
     this->numOfVert = va.numOfVert;
-    this->shader  = shad;
     this->textures = ta.text;
     this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.3f,0.5f));
 }
+Shader * Shape::shader = 0;
 
 
 void Shape::updateCoordinates(const char *model) {

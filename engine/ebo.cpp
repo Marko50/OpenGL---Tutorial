@@ -46,10 +46,15 @@ void ebo::draw() {
     this->updateTransform("transformTrans","transformRot","transformScale");
     this->updateCoordinates("model");
     this->updateColor("color");
+    this->setAmbient("ambientStrength");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
     }
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, this->numOfVert, GL_UNSIGNED_INT, 0);
+}
+
+void ebo::setAmbient(const char *uniformAmbient) {
+    this->shader->setFloat(uniformAmbient, 0.1f);
 }

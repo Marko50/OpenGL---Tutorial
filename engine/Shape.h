@@ -9,6 +9,8 @@
 #include "Texture.h"
 #include <vector>
 
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex);
+
 
 struct vertexArgs{
     float * inf;
@@ -40,10 +42,11 @@ protected:
     std::vector<Texture *> textures;
     glm::mat4 m;
 public:
-    Shader* shader;
-    Shape(vertexArgs va, texArgs ta, Shader* shader,glm::vec4 c);
+    static Shader *shader;
+    Shape(vertexArgs va, texArgs ta, glm::vec4 c);
     virtual  void initGLBuffers(vertexArgs va, texArgs ta) = 0;
     virtual void draw() = 0;
+    virtual void setAmbient(const char * uniformAmbient) = 0;
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);
     void rotate(float degres, bool x, bool y, bool z);

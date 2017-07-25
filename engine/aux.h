@@ -88,5 +88,5 @@ vertexArgs createVertexArgs(  float * inf,
                               int indSize,
                               int numOfVert);
 
-shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex);
+
 #endif //GAMEENGINE_AUX_H
