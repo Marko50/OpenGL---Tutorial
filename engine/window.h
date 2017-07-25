@@ -6,6 +6,7 @@
 #include "Shape.h"
 #include "vbo.h"
 #include "ebo.h"
+#include "lightVBO.h"
 #include "Texture.h"
 #include "Camera.h"
 #include <iostream>

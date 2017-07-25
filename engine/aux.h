@@ -80,10 +80,6 @@ texArgs createTexArgs(bool tex,
                       int posFirstTex,
                       std:: vector<Texture * > text);
 
-colArgs createColorArgs( bool col,
-                         int sizeNextColor,
-                         int posFirstColor);
-
 vertexArgs createVertexArgs(  float * inf,
                               int * ind,
                               int infSize,

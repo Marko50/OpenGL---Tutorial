@@ -30,15 +30,6 @@ vertexArgs createVertexArgs(  float * inf,
     return va;
 }
 
-colArgs createColorArgs( bool col,
-                         int sizeNextColor,
-                         int posFirstColor){
-    colArgs ca;
-    ca.col = col;
-    ca.sizeNextColor = sizeNextColor;
-    ca.posFirstColor = posFirstColor;
-    return ca;
-}
 
 texArgs createTexArgs(bool tex,
                       int sizeNextTex,
@@ -62,7 +53,6 @@ int main(){
         std::cout<<"Failed to create GLF window" << std::endl;
         return -1;
     }
-
     shaderArgs sa = createShaderArgs(0,1,2);
     Shader * shader = new Shader("files/vertexShader", "files/fragmentShader",sa);
     std::vector<Texture *> textures;
@@ -71,20 +61,22 @@ int main(){
     textures.push_back(texture);
     textures.push_back(texture2);
     texArgs ta = createTexArgs(true, 8*sizeof(float), 6*sizeof(float),textures);
-    colArgs ca = createColorArgs(true,8*sizeof(float),3*sizeof(float));
-    colArgs ca2 = createColorArgs(false, 0,0);
     vertexArgs va = createVertexArgs(vertices2,indices,sizeof(vertices2),8*sizeof(float),0,sizeof(indices),6);
     vertexArgs va2 = createVertexArgs(vertices1, NULL , sizeof(vertices1), 8*sizeof(float), 0, 0,3);
     vertexArgs va3 = createVertexArgs(vertices, NULL, sizeof(vertices), 5*sizeof(float),0, 0, 36);
     texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
-    vbo * cube = new vbo(va3, ca2, ta2, shader);
+    glm::vec4 color(0.0f,1.0f,0.0f,1.0f);
+    vbo * cube = new vbo(va3, ta2, shader,color);
+    lightVBO* light = new lightVBO(va3,ta2,shader, glm::vec3(1.0f));
+    light->translate(1.0,0,0);
     cube->translate(-0.4,0,0);
-    vbo* triangle = new vbo(va2,ca,ta,shader);
-    triangle->scale(2.0,0.5,1.0);
-    ebo * rectangle= new ebo(va,ca,ta,shader);
+   // vbo* triangle = new vbo(va2,ta,shader,color);
+    //triangle->scale(2.0,0.5,1.0);
+    //ebo * rectangle= new ebo(va,ta,shader,color);
     window.addShape(cube);
-    window.addShape(triangle);
-    window.addShape(rectangle);
+    window.addShape(light);
+    //window.addShape(triangle);
+    //window.addShape(rectangle);
     window.renderLoop();
     glfwTerminate();
     return 0;

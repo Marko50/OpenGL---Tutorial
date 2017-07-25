@@ -5,7 +5,7 @@
 #include "ebo.h"
 
 
-void ebo::initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) {
+void ebo::initGLBuffers(vertexArgs va, texArgs ta) {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -22,10 +22,7 @@ void ebo::initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) {
     glVertexAttribPointer(this->shader->layoutLocationVertex, 3, GL_FLOAT, GL_FALSE, va.sizeNextVertex, (void*) va.posFirstVertex);
     glEnableVertexAttribArray(this->shader->layoutLocationVertex);
 
-    if(ca.col){
-        glVertexAttribPointer(this->shader->layoutLocationColor,3,GL_FLOAT,GL_FALSE, ca.sizeNextColor,(void *) ca.posFirstColor);
-        glEnableVertexAttribArray(this->shader->layoutLocationColor);
-    }
+
 
     if(ta.tex){
         glVertexAttribPointer(this->shader->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, ta.sizeNextTex, (void *) ta.posFirstTex);
@@ -48,7 +45,7 @@ void ebo::draw() {
     glUseProgram(this->shader->ID);
     this->updateTransform("transformTrans","transformRot","transformScale");
     this->updateCoordinates("model");
-    this->changeColor(1.0f,0.0f,1.0f, 1.0f, "color");
+    this->updateColor("color");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());

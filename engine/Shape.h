@@ -20,12 +20,6 @@ struct vertexArgs{
     int numOfVert;
 };
 
-struct colArgs{
-    bool col;
-    int sizeNextColor;
-    int posFirstColor;
-};
-
 struct texArgs{
     bool tex;
     int sizeNextTex;
@@ -35,6 +29,7 @@ struct texArgs{
 
 class Shape{
 protected:
+    glm::vec4 color;
     float x,y,z;
     float sizex,sizey,sizez;
     float degrees;
@@ -46,16 +41,15 @@ protected:
     glm::mat4 m;
 public:
     Shader* shader;
-    Shape(vertexArgs va, texArgs ta, Shader* shader);
-    virtual  void initGLBuffers(vertexArgs va, colArgs ca, texArgs ta) = 0;
+    Shape(vertexArgs va, texArgs ta, Shader* shader,glm::vec4 c);
+    virtual  void initGLBuffers(vertexArgs va, texArgs ta) = 0;
     virtual void draw() = 0;
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);
     void rotate(float degres, bool x, bool y, bool z);
     void updateCoordinates(const char * model);
-    void changeColor(float R, float G, float B, float O, const char * uniformName);
+    void updateColor(const char * uniformName);
     void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
-    void layDown();
     ~Shape(){
         delete shader;
         glDeleteVertexArrays(1, &VAO);

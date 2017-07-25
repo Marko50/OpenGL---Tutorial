@@ -4,7 +4,8 @@
 
 #include "Shape.h"
 
-Shape::Shape(vertexArgs va,texArgs ta, Shader* shad){
+Shape::Shape(vertexArgs va,texArgs ta, Shader* shad,glm::vec4 c){
+    this->color = c;
     this->scale(1,1,1);
     this->translate(0.0,0,0);
     this->rotate(0,true,true,true);
@@ -12,7 +13,6 @@ Shape::Shape(vertexArgs va,texArgs ta, Shader* shad){
     this->shader  = shad;
     this->textures = ta.text;
     this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.3f,0.5f));
-    //this->p = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f, 0.1f, 100.0f);
 }
 
 
@@ -20,8 +20,8 @@ void Shape::updateCoordinates(const char *model) {
     this->shader->setMatrix4fv(model, m);
 }
 
-void Shape::changeColor(float R, float G, float B, float O, const char *uniformName) {
-    this->shader->set4f(uniformName, R,G,B,O);
+void Shape::updateColor(const char *uniformName) {
+    this->shader->set4f(uniformName, this->color.x, this->color.y, this->color.z, this->color.w);
 }
 
 void Shape::rotate(float degres, bool x, bool y, bool z) {
@@ -53,8 +53,4 @@ void Shape::updateTransform(const char *uniformTrans, const char * uniformRot, c
     glm::mat4 trans3;
     trans3 = glm::scale(trans3, glm::vec3(this->sizex, this->sizey,this->sizez));
     this->shader->setMatrix4fv(uniformScale, trans3);
-}
-
-void Shape::layDown() {
-    this->m = glm::rotate(m, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 }
