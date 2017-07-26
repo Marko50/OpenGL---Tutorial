@@ -5,7 +5,7 @@
 #include "vbo.h"
 
 
-void vbo ::initGLBuffers(vertexArgs va, texArgs ta) {
+void vbo ::initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
     glGenBuffers(1, &VBO);
@@ -19,6 +19,10 @@ void vbo ::initGLBuffers(vertexArgs va, texArgs ta) {
     //position
     glVertexAttribPointer(this->shader->layoutLocationVertex,3,GL_FLOAT,GL_FALSE, va.sizeNextVertex, (void *) va.posFirstVertex);
     glEnableVertexAttribArray(this->shader->layoutLocationVertex);
+
+
+    glVertexAttribPointer(this->shader->layoutLocationNormals, 3 , GL_FLOAT, GL_FALSE, na.sizeNextNorm, (void *) na.posFirstNorm);
+    glEnableVertexAttribArray(this->shader->layoutLocationNormals);
 
 
     //texture
@@ -38,6 +42,7 @@ void vbo::draw() {
     this->updateCoordinates("model");
     this->updateColor("color");
     this->setAmbient("ambientStrength");
+    this->updateNormals("modelChanged");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());

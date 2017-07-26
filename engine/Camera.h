@@ -44,6 +44,8 @@ public:
     float MovementSpeed;
     float MouseSensitivity;
     float Zoom;
+    glm::mat4 v;
+    glm::mat4 p;
 
     // Constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
@@ -53,6 +55,8 @@ public:
         Yaw = yaw;
         Pitch = pitch;
         updateCameraVectors();
+        this->p = glm::perspective(glm::radians(this->Zoom), (float)800/(float)600, 0.1f,100.0f);
+        this->v = GetViewMatrix();
     }
     // Constructor with scalar values
     Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVTY), Zoom(ZOOM)
@@ -62,6 +66,8 @@ public:
         Yaw = yaw;
         Pitch = pitch;
         updateCameraVectors();
+        this->p = glm::perspective(glm::radians(this->Zoom), (float)800/(float)600, 0.1f,100.0f);
+        this->v = v = GetViewMatrix();
     }
 
     // Returns the view matrix calculated using Eular Angles and the LookAt Matrix
@@ -120,15 +126,12 @@ public:
     }
 
     void update(int ID, const char * uniformViewName, const char * uniformProjection){
-        glm::mat4 v;
-        v = GetViewMatrix();
+        this->v = GetViewMatrix();
         int local = glGetUniformLocation(ID,uniformViewName);
-        glUniformMatrix4fv(local,1,GL_FALSE, glm::value_ptr(v));
+        glUniformMatrix4fv(local,1,GL_FALSE, glm::value_ptr(this->v));
 
-        glm::mat4 p;
-        p = glm::perspective(glm::radians(this->Zoom), (float)800/(float)600, 0.1f,100.0f);
         int local2 = glGetUniformLocation(ID,uniformProjection);
-        glUniformMatrix4fv(local2,1,GL_FALSE, glm::value_ptr(p));
+        glUniformMatrix4fv(local2,1,GL_FALSE, glm::value_ptr(this->p));
     }
 
 private:

@@ -9,7 +9,7 @@
 #include "Texture.h"
 #include <vector>
 
-shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex);
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex, int lPosNorm);
 
 
 struct vertexArgs{
@@ -29,6 +29,11 @@ struct texArgs{
     std:: vector<Texture * > text;
 };
 
+struct normalArgs{
+    int sizeNextNorm;
+    int posFirstNorm;
+};
+
 class Shape{
 protected:
     glm::vec4 color;
@@ -44,7 +49,7 @@ protected:
 public:
     static Shader *shader;
     Shape(vertexArgs va, texArgs ta, glm::vec4 c);
-    virtual  void initGLBuffers(vertexArgs va, texArgs ta) = 0;
+    virtual  void initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) = 0;
     virtual void draw() = 0;
     virtual void setAmbient(const char * uniformAmbient) = 0;
     void translate(float x, float y, float z);
@@ -52,6 +57,7 @@ public:
     void rotate(float degres, bool x, bool y, bool z);
     void updateCoordinates(const char * model);
     void updateColor(const char * uniformName);
+    void updateNormals(const char * uniform);
     void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
     ~Shape(){
         delete shader;

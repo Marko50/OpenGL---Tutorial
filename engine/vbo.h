@@ -12,11 +12,11 @@ class vbo: public Shape{
 private:
 
 public:
-    vbo(vertexArgs va, texArgs ta,glm::vec4 c)
+    vbo(vertexArgs va, texArgs ta, normalArgs na,  glm::vec4 c)
             : Shape(va,ta,c){
-        this->initGLBuffers(va,ta);
+        this->initGLBuffers(va,ta,na);
     }
-    void initGLBuffers(vertexArgs va, texArgs ta);
+    void initGLBuffers(vertexArgs va, texArgs ta,normalArgs na);
     void setAmbient(const char * uniformAmbient);
     void draw();
 };

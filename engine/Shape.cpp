@@ -4,16 +4,17 @@
 
 #include "Shape.h"
 
-shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex){
+shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex, int lNormAgrs){
     shaderArgs sa;
     sa.layoutLocationVertex = lposVer;
     sa.layoutLocationColor = lPosColor;
     sa.layoutLocationTex = lPosTex;
+    sa.layoutLocationNormals = lNormAgrs;
     return  sa;
 }
 
 Shape::Shape(vertexArgs va,texArgs ta ,glm::vec4 c){
-    this->shader =  new Shader("files/vertexShader", "files/fragmentShader", createShaderArgs(0,1,2));
+    this->shader =  new Shader("files/vertexShader", "files/fragmentShader", createShaderArgs(0,1,2,3));
     this->color = c;
     this->scale(1,1,1);
     this->translate(0.0,0,0);
@@ -62,4 +63,10 @@ void Shape::updateTransform(const char *uniformTrans, const char * uniformRot, c
     glm::mat4 trans3;
     trans3 = glm::scale(trans3, glm::vec3(this->sizex, this->sizey,this->sizez));
     this->shader->setMatrix4fv(uniformScale, trans3);
+}
+
+void Shape::updateNormals(const char *uniform) {
+    glm::mat4 aux;
+    aux = glm::transpose(glm::inverse(this->m));
+    this->shader->setMatrix4fv(uniform, aux);
 }

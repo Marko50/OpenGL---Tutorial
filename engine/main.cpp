@@ -4,6 +4,13 @@
 #include "aux.h"
 
 
+normalArgs createNormalAgrs(int posFirstNorm, int sizeNextNorm){
+    normalArgs na;
+    na.posFirstNorm = posFirstNorm;
+    na.sizeNextNorm = sizeNextNorm;
+    return na;
+}
+
 vertexArgs createVertexArgs(  float * inf,
                               int * ind,
                               int infSize,
@@ -48,17 +55,18 @@ int main(){
         return -1;
     }
     std::vector<Texture *> textures;
-    Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
-    Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
-    textures.push_back(texture);
-    textures.push_back(texture2);
-    vertexArgs va3 = createVertexArgs(vertices, NULL, sizeof(vertices), 5*sizeof(float),0, 0, 36);
-    texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
+    //Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
+    //Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
+    //textures.push_back(texture);
+    //textures.push_back(texture2);
+    normalArgs na = createNormalAgrs(3*sizeof(float), 6*sizeof(float));
+    vertexArgs va3 = createVertexArgs(vertices3, NULL, sizeof(vertices3), 6*sizeof(float),0, 0, 36);
+   // texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
     texArgs ta = createTexArgs(false,0, 0, textures);
     glm::vec4 color(0.0f,1.0f,0.0f,1.0f);
-    vbo * cube = new vbo(va3, ta2, color);
-    lightVBO* light = new lightVBO(va3,ta,glm::vec3(1.0f));
-    light->translate(1.0,0,0);
+    vbo * cube = new vbo(va3, ta,na, color);
+    lightVBO* light = new lightVBO(va3,ta,na,glm::vec3(1.0f));
+    light->translate(1.0,1.0,0.4);
     cube->translate(-0.4,0,0);
     window.addShape(cube);
     window.addShape(light);

@@ -47,6 +47,10 @@ void Shader::set4f(const std::string &name,  float  R, float  G, float  B, float
     glUniform4f(glGetUniformLocation(ID, name.c_str()), R,G,B,O);
 }
 
+void Shader::set3f(const std::string &name, float x, float y, float z) const {
+    glUniform3f(glGetUniformLocation(ID,name.c_str()), x,y,z);
+}
+
 Shader::Shader(const char* vertexPath, const char* fragmentPath, shaderArgs sa)
 {
     // 1. retrieve the vertex/fragment source code from filePath
@@ -106,5 +110,5 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, shaderArgs sa)
     this->layoutLocationVertex = sa.layoutLocationVertex;
     this->layoutLocationColor = sa.layoutLocationColor;
     this->layoutLocationTex = sa.layoutLocationTex;
-
+    this->layoutLocationNormals = sa.layoutLocationNormals;
 }

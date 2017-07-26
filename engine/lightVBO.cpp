@@ -10,6 +10,8 @@ void lightVBO::draw() {
     this->updateColor("color");
     this->updateLightColor("lightColor");
     this->setAmbient("ambientStrength");
+    this->updateNormals("modelChanged");
+    this->updateLightPos("lightPos");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
@@ -20,6 +22,10 @@ void lightVBO::draw() {
 
 void lightVBO::updateLightColor(const char *uniformLight) {
     this->shader->set4f(uniformLight, this->lightColor.x, this->lightColor.y, this->color.z, 1.0);
+}
+
+void lightVBO::updateLightPos(const char *uniformLightPos) {
+    this->shader->set3f(uniformLightPos, this->x,this->y, this->z);
 }
 
 
