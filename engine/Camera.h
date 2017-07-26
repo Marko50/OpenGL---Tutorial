@@ -134,6 +134,11 @@ public:
         glUniformMatrix4fv(local2,1,GL_FALSE, glm::value_ptr(this->p));
     }
 
+    void updateCameraPosition(int ID, const char * uniformCameraPos){
+        int local = glGetUniformLocation(ID, uniformCameraPos);
+        glUniform3f(ID,this->Position.x, this->Position.y, this->Position.z);
+    }
+
 private:
     // Calculates the front vector from the Camera's (updated) Eular Angles
     void updateCameraVectors()

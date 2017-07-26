@@ -47,21 +47,9 @@
     <list default="true" id="3004d491-4872-4180-a41f-b53b9d787d66" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Camera.h" afterPath="$PROJECT_DIR$/engine/Camera.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Shape.cpp" afterPath="$PROJECT_DIR$/engine/Shape.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/Shape.h" afterPath="$PROJECT_DIR$/engine/Shape.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/aux.h" afterPath="$PROJECT_DIR$/engine/aux.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/ebo.cpp" afterPath="$PROJECT_DIR$/engine/ebo.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/ebo.h" afterPath="$PROJECT_DIR$/engine/ebo.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/lightVBO.cpp" afterPath="$PROJECT_DIR$/engine/lightVBO.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/lightVBO.h" afterPath="$PROJECT_DIR$/engine/lightVBO.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/main.cpp" afterPath="$PROJECT_DIR$/engine/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/shader.cpp" afterPath="$PROJECT_DIR$/engine/shader.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/shader.h" afterPath="$PROJECT_DIR$/engine/shader.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/vbo.cpp" afterPath="$PROJECT_DIR$/engine/vbo.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/vbo.h" afterPath="$PROJECT_DIR$/engine/vbo.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/engine/window.cpp" afterPath="$PROJECT_DIR$/engine/window.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/fragmentShader" afterPath="$PROJECT_DIR$/files/fragmentShader" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/vertexShader" afterPath="$PROJECT_DIR$/files/vertexShader" />
     </list>
     <ignored path="GameEngine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,8 +83,8 @@
       <file leaf-file-name="window.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/window.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
+            <state relative-caret-position="407">
+              <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -112,11 +100,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Shape.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Shape.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/Shape.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="61" column="53" selection-start-line="59" selection-start-column="4" selection-end-line="61" selection-end-column="53" />
+            <state relative-caret-position="522">
+              <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Camera.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/engine/Camera.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -135,8 +133,8 @@
       <file leaf-file-name="fragmentShader" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/files/fragmentShader">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+            <state relative-caret-position="407">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -145,8 +143,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1217">
-              <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+            <state relative-caret-position="353">
+              <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -199,7 +197,6 @@
         <option value="$PROJECT_DIR$/engine/aux.h" />
         <option value="$PROJECT_DIR$/engine/ebo.h" />
         <option value="$PROJECT_DIR$/engine/vbo.h" />
-        <option value="$PROJECT_DIR$/engine/Camera.h" />
         <option value="$PROJECT_DIR$/engine/Shape.h" />
         <option value="$PROJECT_DIR$/engine/Shape.cpp" />
         <option value="$PROJECT_DIR$/engine/ebo.cpp" />
@@ -209,9 +206,10 @@
         <option value="$PROJECT_DIR$/engine/shader.cpp" />
         <option value="$PROJECT_DIR$/engine/lightVBO.cpp" />
         <option value="$PROJECT_DIR$/files/vertexShader" />
-        <option value="$PROJECT_DIR$/files/fragmentShader" />
-        <option value="$PROJECT_DIR$/engine/main.cpp" />
+        <option value="$PROJECT_DIR$/engine/Camera.h" />
         <option value="$PROJECT_DIR$/engine/window.cpp" />
+        <option value="$PROJECT_DIR$/engine/main.cpp" />
+        <option value="$PROJECT_DIR$/files/fragmentShader" />
       </list>
     </option>
   </component>
@@ -670,7 +668,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1431" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14911607" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -678,7 +676,7 @@
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33979136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12965722" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12965722" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -883,7 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,14 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-25">
           <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/engine/Camera.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -967,30 +956,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="37" column="30" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/files/vertexShader">
+    <entry file="file://$PROJECT_DIR$/engine/window.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/fragmentShader">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/engine/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1217">
-          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+        <state relative-caret-position="407">
+          <caret line="86" column="33" selection-start-line="86" selection-start-column="33" selection-end-line="86" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1011,18 +983,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/engine/window.cpp">
+    <entry file="file://$PROJECT_DIR$/files/fragmentShader">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="90" column="36" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
+        <state relative-caret-position="407">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/vertexShader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/engine/Shape.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="61" column="53" selection-start-line="59" selection-start-column="4" selection-end-line="61" selection-end-column="53" />
+        <state relative-caret-position="522">
+          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/engine/Camera.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="68" column="7" selection-start-line="68" selection-start-column="7" selection-end-line="68" selection-end-column="7" />
           <folding />
         </state>
       </provider>

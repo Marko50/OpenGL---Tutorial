@@ -66,8 +66,8 @@ int main(){
     glm::vec4 color(0.0f,1.0f,0.0f,1.0f);
     vbo * cube = new vbo(va3, ta,na, color);
     lightVBO* light = new lightVBO(va3,ta,na,glm::vec3(1.0f));
-    light->translate(1.0,1.0,0.4);
-    cube->translate(-0.4,0,0);
+    light->translate(1.0,1.0,1.0);
+    cube->translate(1.0,-1.0,1.0);
     window.addShape(cube);
     window.addShape(light);
     window.renderLoop();
