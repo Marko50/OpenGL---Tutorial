@@ -61,19 +61,15 @@ int main(){
     //textures.push_back(texture2);
     normalArgs na = createNormalAgrs(3*sizeof(float), 6*sizeof(float));
     vertexArgs va3 = createVertexArgs(vertices3, NULL, sizeof(vertices3), 6*sizeof(float),0, 0, 36);
-   // texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
+    // texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
     texArgs ta = createTexArgs(false,0, 0, textures);
-    glm::vec4 color(0.0f,1.0f,0.0f,1.0f);
+    glm::vec4 color(1.0f,0.5f,0.31f,1.0f);
     vbo * cube = new vbo(va3, ta,na, color);
-    lightVBO* light = new lightVBO(va3,ta,na,glm::vec3(1.0f));
-    light->translate(1.0,1.0,1.0);
-    cube->translate(1.0,-1.0,1.0);
+    lightVBO* light = new lightVBO(va3,ta,na,glm::vec3(1.0f,1.0f,1.0f));
+    light->translate(2.0,0.0,0.0);
     window.addShape(cube);
     window.addShape(light);
     window.renderLoop();
-
-     glfwTerminate();
-
+    glfwTerminate();
     return 0;
-
 }

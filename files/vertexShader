@@ -8,6 +8,8 @@
   out vec2 TexCoord;
   out vec3 Normal;
   out vec3 FragPos;
+  out vec3 lPos;
+  out vec3 vPos;
 
   uniform mat4 transformRot;
   uniform mat4 transformTrans;
@@ -16,12 +18,16 @@
   uniform mat4 view;
   uniform mat4 projection;
   uniform mat4 modelChanged;
+  uniform vec3 viewPos;
+  uniform vec3 lightPos;
 
   void main()
   {
     gl_Position =   projection * view * model * transformScale * transformRot * transformTrans * vec4(aPos.x, aPos.y, aPos.z, 1.0);
     ourColor = aColor;
     FragPos = vec3(model * vec4(aPos,1.0));
+    lPos = vec3(model * vec4(lightPos,1.0));
+    vPos = vec3(model * vec4(viewPos,1.0));
     Normal = mat3(modelChanged) * aNormal;
     TexCoord = aTexCoord;
   }

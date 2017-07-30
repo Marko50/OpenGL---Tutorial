@@ -46,6 +46,7 @@ public:
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
     void set3f(const std::string &name, float x, float y, float z) const;
+    void set3f(const std::string &name, const glm::vec3 &vec) const ;
     void setMatrix4fv(const std::string &name, glm::mat4 trans);
     void set4f(const std::string &name, float R, float G, float B, float O);
 };

@@ -136,7 +136,7 @@ public:
 
     void updateCameraPosition(int ID, const char * uniformCameraPos){
         int local = glGetUniformLocation(ID, uniformCameraPos);
-        glUniform3f(ID,this->Position.x, this->Position.y, this->Position.z);
+        glUniform3f(local,this->Position.x, this->Position.y, this->Position.z);
     }
 
 private:
