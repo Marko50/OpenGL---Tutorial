@@ -63,10 +63,13 @@ int main(){
     vertexArgs va3 = createVertexArgs(vertices3, NULL, sizeof(vertices3), 6*sizeof(float),0, 0, 36);
     // texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
     texArgs ta = createTexArgs(false,0, 0, textures);
-    glm::vec4 color(1.0f,0.5f,0.31f,1.0f);
-    vbo * cube = new vbo(va3, ta,na, color);
-    lightVBO* light = new lightVBO(va3,ta,na,glm::vec3(1.0f,1.0f,1.0f));
-    light->translate(2.0,0.0,0.0);
+    vbo * cube = new vbo(va3, ta,na);
+    cube->setAmbient(0.0215 ,0.1745 , 0.0215);
+    cube->setDiffuse(0.07568 ,0.61424 ,0.07568);
+    cube->setSpecular(0.633 ,0.727811 ,0.633);
+    cube->setShininess(0.6);
+    lightVBO* light = new lightVBO(va3,ta,na);
+    light->translate(2.0,2.0,2.0);
     window.addShape(cube);
     window.addShape(light);
     window.renderLoop();

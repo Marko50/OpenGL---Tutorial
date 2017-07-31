@@ -40,8 +40,10 @@ void vbo ::initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) {
 void vbo::draw() {
     this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
-    this->updateColor("color");
-    this->setAmbient("ambientStrength");
+    this->updateMaterial("material.diffuse","material.ambient","material.specular","material.shininess");
+    this->shader->set3f("light.ambient",  0.2f, 0.2f, 0.2f);
+    this->shader->set3f("light.diffuse",  0.5f, 0.5f, 0.5f); // darken the light a bit to fit the scene
+    this->shader->set3f("light.specular", 1.0f, 1.0f, 1.0f);
     this->updateNormals("modelChanged");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
@@ -49,8 +51,4 @@ void vbo::draw() {
     }
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLES, 0,this->numOfVert);
-}
-
-void vbo::setAmbient(const char *uniformAmbient) {
-    this->shader->setFloat(uniformAmbient, 0.1f);
 }

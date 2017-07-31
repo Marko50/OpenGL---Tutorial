@@ -7,11 +7,10 @@
 void lightVBO::draw() {
     this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
-    this->updateColor("color");
-    this->updateLightColor("lightColor");
-    this->setAmbient("ambientStrength");
     this->updateNormals("modelChanged");
-    this->updateLightPos("lightPos");
+    this->updateMaterial("material.diffuse","material.ambient","material.specular","material.shininess");
+    this->updateMaterial("light.diffuse","light.ambient","light.specular","material.shininess");
+    this->updateLightPositon("light.position");
     for(unsigned int i = 0; i < this->textures.size(); i++){
         glActiveTexture(this->textures[i]->getTextureUnit());
         glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
@@ -20,21 +19,7 @@ void lightVBO::draw() {
     glDrawArrays(GL_TRIANGLES, 0,this->numOfVert);
 }
 
-void lightVBO::updateLightColor(const char *uniformLight) {
-    this->shader->set4f(uniformLight, this->lightColor.x, this->lightColor.y, this->color.z, 1.0);
+void lightVBO::updateLightPositon(const char *uniformLightPos) {
+    this->shader->set3f(uniformLightPos, this->x, this->y, this->z);
 }
 
-void lightVBO::updateLightPos(const char *uniformLightPos) {
-    this->shader->set3f(uniformLightPos, this->x,this->y, this->z);
-}
-
-
-void lightVBO::changeLightColor(float R, float G, float B) {
-    this->lightColor.x = R;
-    this->lightColor.y = G;
-    this->lightColor.z = B;
-}
-
-void lightVBO::setAmbient(const char * uniformAmbient) {
-    this->shader->setFloat(uniformAmbient, 1.0f);
-}

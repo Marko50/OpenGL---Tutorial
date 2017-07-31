@@ -9,16 +9,15 @@
 #include "vbo.h"
 
 class lightVBO : public vbo {
-    glm::vec3 lightColor;
 public:
-    lightVBO(const vertexArgs &va, const texArgs &ta, const normalArgs & na, const glm::vec3 &c) : vbo(va, ta, na, glm::vec4(1.0f)){
-        this->lightColor = c;
+    lightVBO(const vertexArgs &va, const texArgs &ta, const normalArgs & na) : vbo(va, ta, na){
+        this->setDiffuse(1.0f,1.0f,1.0f);
+        this->setSpecular(1.0f,1.0f,1.0f);
+        this->setAmbient(1.0f,1.0f,1.0f);
+        this->shininess = 1.0f;
     }
-    void updateLightColor(const char * uniformLight);
-    void setAmbient(const char * uniformAmbient);
-    void updateLightPos(const char * uniformLightPos);
+    void updateLightPositon(const char * uniformLightPos);
     void draw();
-    void changeLightColor(float R, float G, float B);
 };
 
 

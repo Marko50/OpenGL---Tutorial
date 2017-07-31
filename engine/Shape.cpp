@@ -13,15 +13,18 @@ shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex, int lNormAg
     return  sa;
 }
 
-Shape::Shape(vertexArgs va,texArgs ta ,glm::vec4 c){
+Shape::Shape(vertexArgs va,texArgs ta ){
     this->shader =  new Shader("files/vertexShader", "files/fragmentShader", createShaderArgs(0,1,2,3));
-    this->color = c;
     this->scale(1,1,1);
     this->translate(0.0,0,0);
     this->rotate(0,true,true,true);
     this->numOfVert = va.numOfVert;
     this->textures = ta.text;
     this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.3f,0.5f));
+    this->setAmbient(1.0f,0.5f,0.31f);
+    this->setDiffuse(1.0f,0.5f,0.31f);
+    this->setSpecular(1.0f,1.0f,1.0f);
+    this->shininess = 32.0f;
 }
 Shader * Shape::shader = 0;
 
@@ -30,9 +33,28 @@ void Shape::updateCoordinates(const char *model) {
     this->shader->setMatrix4fv(model, m);
 }
 
-void Shape::updateColor(const char *uniformName) {
-    this->shader->set4f(uniformName, this->color.x, this->color.y, this->color.z, this->color.w);
+void Shape::setAmbient(float x, float y, float z) {
+    this->ambient.x = x;
+    this->ambient.y = y;
+    this->ambient.z = z;
 }
+
+void Shape::setDiffuse(float x, float y, float z) {
+    this->diffuse.x = x;
+    this->diffuse.y = y;
+    this->diffuse.z = z;
+}
+
+void Shape::setSpecular(float x, float y, float z) {
+    this->specular.x = x;
+    this->specular.y = y;
+    this->specular.z = z;
+}
+
+void Shape::setShininess(float s) {
+    this->shininess = s;
+}
+
 
 void Shape::rotate(float degres, bool x, bool y, bool z) {
     this->degrees = degres;
@@ -69,4 +91,12 @@ void Shape::updateNormals(const char *uniform) {
     glm::mat4 aux;
     aux = glm::transpose(glm::inverse(this->m));
     this->shader->setMatrix4fv(uniform, aux);
+}
+
+
+void Shape::updateMaterial(const char *uniformDiff, const char *uniformAmbient, const char *uniformSpec,const char * uniformShini) {
+    this->shader->set3f(uniformDiff, this->diffuse);
+    this->shader->set3f(uniformAmbient, this->ambient);
+    this->shader->set3f(uniformSpec, this->specular);
+    this->shader->setFloat(uniformShini, this->shininess);
 }
