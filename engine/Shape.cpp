@@ -34,6 +34,7 @@ void Shape::translate(float x, float y, float z) {
     this->x = x;
     this->y = y;
     this->z = z;
+    this->m = glm::translate(m, glm::vec3(x,y,z));
 }
 
 void Shape::scale(float x, float y, float z) {
