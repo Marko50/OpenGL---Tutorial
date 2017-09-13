@@ -4,22 +4,63 @@
 
 #include "lightVBO.h"
 
-void lightVBO::draw() {
-    this->updateTransform("transformTrans","transformRot","transformScale" );
-    this->updateCoordinates("model");
-    this->updateNormals("modelChanged");
-    this->updateMaterial("material.diffuse","material.ambient","material.specular","material.shininess");
-    this->updateMaterial("light.diffuse","light.ambient","light.specular","material.shininess");
-    this->updateLightPositon("light.position");
-    for(unsigned int i = 0; i < this->textures.size(); i++){
-        glActiveTexture(this->textures[i]->getTextureUnit());
-        glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
-    }
-    glBindVertexArray(this->VAO);
-    glDrawArrays(GL_TRIANGLES, 0,this->numOfVert);
+Shader * lightVBO:: shader = 0;
+
+
+void lightVBO::updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale) {
+    glm::mat4 trans;
+    trans = glm::rotate(trans, glm::radians(this->degrees), glm::vec3((int)this->rotX, (int)this->rotY, (int)this->rotZ));
+    this->shader->setMatrix4fv(uniformRot, trans);
+    glm::mat4 trans2;
+    trans2 = glm::translate(trans2, glm::vec3(this->x,this->y,this->z));
+    this->shader->setMatrix4fv(uniformTrans, trans2);
+    glm::mat4 trans3;
+    trans3 = glm::scale(trans3, glm::vec3(this->sizex, this->sizey,this->sizez));
+    this->shader->setMatrix4fv(uniformScale, trans3);
 }
 
-void lightVBO::updateLightPositon(const char *uniformLightPos) {
-    this->shader->set3f(uniformLightPos, this->x, this->y, this->z);
+void lightVBO::updateNormals(const char *uniform) {
+    glm::mat4 aux;
+    aux = glm::transpose(glm::inverse(this->m));
+    this->shader->setMatrix4fv(uniform, aux);
 }
+
+void lightVBO::updateCoordinates(const char *model) {
+    this->shader->setMatrix4fv(model, m);
+}
+
+void lightVBO::updateLightProperties(const char * type, const char * diffuse, const char * spec, const char * amb) {
+    std::string d,s,a;
+    std::string aux = type;
+    aux += "[";
+    std::stringstream ss;
+    ss << this->id;
+    aux += ss.str();
+    aux += "].";
+    d = aux + diffuse;
+    s = aux + spec;
+    a = aux + amb;
+    vbo::shader->set3f(d, this->diffuse);
+    vbo::shader->set3f(s, this->specular);
+    vbo::shader->set3f(a, this->ambient);
+}
+
+void lightVBO::setDiffuse(float x, float y, float z) {
+    this->diffuse.x = x;
+    this->diffuse.y = y;
+    this->diffuse.z = z;
+}
+
+void lightVBO::setSpecular(float x, float y, float z) {
+    this->specular.x = x;
+    this->specular.y = y;
+    this->specular.z = z;
+}
+
+void lightVBO::setAmbient(float x, float y, float z) {
+    this->ambient.x = x;
+    this->ambient.y = y;
+    this->ambient.z = z;
+}
+
 

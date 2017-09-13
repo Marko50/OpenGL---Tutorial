@@ -1,0 +1,28 @@
+/home/user/clion-2017.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/user/Desktop/Andre/GameEngine
+-- Could NOT find Vulkan (missing:  Vulkan_LIBRARY Vulkan_INCLUDE_DIR) 
+-- Using X11 for window creation
+-- Configuring done
+CMake Error at src/CMakeLists.txt:68 (add_library):
+  Cannot find source file:
+
+    /src/glfw_config.h
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp
+  .hxx .in .txx
+
+
+CMake Error: CMake can not determine linker language for target: glfw
+CMake Error in src/CMakeLists.txt:
+  Exporting the target "glfw" is not allowed since its linker language cannot
+  be determined
+
+
+CMake Error: CMake can not determine linker language for target: glfw
+CMake Error in src/CMakeLists.txt:
+  Exporting the target "glfw" is not allowed since its linker language cannot
+  be determined
+
+
+CMake Error: Cannot determine link language for target "glfw".
+-- Generating done
+-- Build files have been written to: /home/user/Desktop/Andre/GameEngine/cmake-build-debug

@@ -80,7 +80,8 @@ void Window::processInput() {
 }
 
 void Window::renderLoop() {
-    glUseProgram(Shape::shader->ID);
+    vbo::shader->setInt("material.diffuse", 0);
+    vbo::shader->setInt("material.specular", 1);
     while(!glfwWindowShouldClose(window)){
         float currentFrame = (float)glfwGetTime();
         deltaTime = currentFrame - lastFrame;
@@ -92,16 +93,33 @@ void Window::renderLoop() {
         glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
         this->camera->ProcessMouseMovement(xoffset,yoffset);
         this->camera->ProcessMouseScroll(yScroll);
-        this->camera->update(shapes[0]->shader->ID, "view", "projection");
-        this->camera->updateCameraPosition(shapes[0]->shader->ID, "viewPos");
+
+        glUseProgram(lightVBO::shader->ID);
+        this->camera->update(lightVBO::shader->ID, "view", "projection");
+        this->camera->updateCameraPosition(lightVBO::shader->ID, "viewPos");
+        for(int i = 0; i < lights.size(); i ++){
+            lights[i]->draw();
+        }
+
+        glUseProgram(vbo::shader->ID);
+        vbo::shader->setFloat("material.shininess", 32.0f);
+        this->camera->update(vbo::shader->ID, "view", "projection");
+        this->camera->updateCameraPosition(vbo::shader->ID, "viewPos");
+
         for(int i = 0; i < shapes.size(); i ++){
             shapes[i]->draw();
         }
+
+
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 }
 
-void Window::addShape(Shape *shape) {
+void Window::addShape(vbo *shape) {
     this->shapes.push_back(shape);
+}
+
+void Window::addLight(lightVBO *light) {
+    this->lights.push_back(light);
 }

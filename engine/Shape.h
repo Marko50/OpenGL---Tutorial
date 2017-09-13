@@ -9,7 +9,7 @@
 #include "Texture.h"
 #include <vector>
 
-shaderArgs createShaderArgs(int lposVer, int lPosColor, int lPosTex, int lPosNorm);
+shaderArgs createShaderArgs(int lposVer,  int lPosNorm, int lPosTex);
 
 
 struct vertexArgs{
@@ -36,10 +36,6 @@ struct normalArgs{
 
 class Shape{
 protected:
-    glm::vec3 diffuse;
-    glm::vec3 ambient;
-    glm::vec3 specular;
-    float shininess;
     float x,y,z;
     float sizex,sizey,sizez;
     float degrees;
@@ -50,23 +46,16 @@ protected:
     std::vector<Texture *> textures;
     glm::mat4 m;
 public:
-    static Shader *shader;
     Shape(vertexArgs va, texArgs ta);
     virtual  void initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) = 0;
     virtual void draw() = 0;
-    void setDiffuse(float x,float y, float z);
-    void setAmbient(float x, float y, float z);
-    void setSpecular(float x, float y, float z);
-    void setShininess(float s);
-    void updateMaterial(const char * uniformDiff, const char * uniformAmbient, const char * uniformSpec, const char * uniformShini);
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);
     void rotate(float degres, bool x, bool y, bool z);
-    void updateCoordinates(const char * model);
-    void updateNormals(const char * uniform);
-    void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
+    virtual void updateCoordinates(const char * model) = 0;
+    virtual void updateNormals(const char * uniform) = 0;
+    virtual void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale) = 0;
     ~Shape(){
-        delete shader;
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
     };

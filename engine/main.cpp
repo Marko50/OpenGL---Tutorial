@@ -55,23 +55,43 @@ int main(){
         return -1;
     }
     std::vector<Texture *> textures;
-    //Texture * texture = new Texture("assets/container.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE0);
-    //Texture * texture2 = new Texture("assets/wall.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR, GL_LINEAR, GL_TEXTURE1);
-    //textures.push_back(texture);
-    //textures.push_back(texture2);
-    normalArgs na = createNormalAgrs(3*sizeof(float), 6*sizeof(float));
-    vertexArgs va3 = createVertexArgs(vertices3, NULL, sizeof(vertices3), 6*sizeof(float),0, 0, 36);
-    // texArgs ta2 = createTexArgs(true, 5*sizeof(float), 3*sizeof(float), textures);
-    texArgs ta = createTexArgs(false,0, 0, textures);
-    vbo * cube = new vbo(va3, ta,na);
-    cube->setAmbient(0.0215 ,0.1745 , 0.0215);
-    cube->setDiffuse(0.07568 ,0.61424 ,0.07568);
-    cube->setSpecular(0.633 ,0.727811 ,0.633);
-    cube->setShininess(0.6);
-    lightVBO* light = new lightVBO(va3,ta,na);
-    light->translate(2.0,2.0,2.0);
+    std::vector<Texture *> textures2;
+    //Texture * texture1 = new Texture("assets/2560x1440-white-solid-color-background.jpg",GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_TEXTURE0);
+    Texture * texture = new Texture("assets/container2.png",GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_TEXTURE0);
+    Texture * texture2 = new Texture("assets/container2_specular.png",GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_TEXTURE1);
+
+    textures.push_back(texture);
+    textures.push_back(texture2);
+
+    normalArgs na = createNormalAgrs(3*sizeof(float), 8*sizeof(float));
+    vertexArgs va3 = createVertexArgs(vertices, NULL, sizeof(vertices), 8*sizeof(float),0, 0, 36);
+    texArgs ta2 = createTexArgs(true, 8*sizeof(float), 6*sizeof(float), textures);
+    texArgs ta = createTexArgs(false,0, 0, textures2);
+    vbo * cube = new vbo(va3, ta2,na);
+    cube->translate(-1.0f,0.0f,0.0f);
+    vbo * cube2 = new vbo(va3, ta2,na);
+    //cube2->translate(2,3,2);
+
+    DirectionalLight* directionalLight = new DirectionalLight(va3,ta,na);
+    directionalLight->setDirection(glm::vec3(-0.2f,-1.0f,-0.3f));
+    directionalLight->setAmbient(0.05f,0.05f,0.05f);
+    directionalLight->setDiffuse(0.4f,0.4f,0.4f);
+    directionalLight->setSpecular(0.5f,0.5f,0.5f);
+    PointLight * pointLight = new PointLight(va3, ta , na);
+    pointLight->scale(0.5f,0.5f,0.5f);
+    pointLight->translate(2.0f,1.0f,3.0f);
+    SpotLight * spotLight = new SpotLight(va3,ta,na);
+   // spotLight->translate(window.getCamera()->Position.x, window.getCamera()->Position.y, window.getCamera()->Position.z);
+    //spotLight->setDirection(window.getCamera()->Front);
+    spotLight->translate(2.0f,0.0f,0.0f);
+    spotLight->setDirection(glm::vec3(-1.0f,0.0f,0.0f));
+    spotLight->scale(0.25f,0.25f,0.25f);
+
+    window.addLight(spotLight);
+    window.addLight(directionalLight);
+    //window.addLight(pointLight);
     window.addShape(cube);
-    window.addShape(light);
+    //window.addShape(cube2);
     window.renderLoop();
     glfwTerminate();
     return 0;

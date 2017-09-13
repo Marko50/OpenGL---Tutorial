@@ -18,7 +18,6 @@
 
 struct shaderArgs{
     int layoutLocationVertex;
-    int layoutLocationColor;
     int layoutLocationTex;
     int layoutLocationNormals;
 };
@@ -33,7 +32,6 @@ public:
     unsigned int ID;
 
     int layoutLocationVertex;
-    int layoutLocationColor;
     int layoutLocationTex;
     int layoutLocationNormals;
 

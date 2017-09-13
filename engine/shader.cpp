@@ -113,7 +113,6 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath, shaderArgs sa)
     glDeleteShader(fragment);
 
     this->layoutLocationVertex = sa.layoutLocationVertex;
-    this->layoutLocationColor = sa.layoutLocationColor;
     this->layoutLocationTex = sa.layoutLocationTex;
     this->layoutLocationNormals = sa.layoutLocationNormals;
 }

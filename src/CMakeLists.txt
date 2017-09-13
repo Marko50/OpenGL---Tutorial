@@ -1,5 +1,5 @@
 set(common_HEADERS internal.h
-                   "${GLFW_BINARY_DIR}/src/glfw_config.h"
+                    "${GLFW_BINARY_DIR}/src/glfw_config.h"
                    "${GLFW_SOURCE_DIR}/include/GLFW/glfw3.h"
                    "${GLFW_SOURCE_DIR}/include/GLFW/glfw3native.h")
 set(common_SOURCES context.c init.c input.c monitor.c vulkan.c window.c)
