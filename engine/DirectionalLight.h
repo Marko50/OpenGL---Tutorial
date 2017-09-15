@@ -12,7 +12,7 @@ class DirectionalLight: public lightVBO {
     glm::vec3 direction;
     static unsigned int count;
 public:
-    DirectionalLight (const vertexArgs &va, const texArgs &ta, const normalArgs & na) : lightVBO(va,ta,na){
+    DirectionalLight (const vertexArgs &va) : lightVBO(va){
         this->setDirection(glm::vec3(-0.2f,-1.0f,-0.3f));
         this->id = count;
         count ++;

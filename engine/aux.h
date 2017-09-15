@@ -120,17 +120,15 @@ float vertices3[] = {
 };
 
 
-texArgs createTexArgs(bool tex,
+texArgs createTexArgs(
                       int sizeNextTex,
                       int posFirstTex,
                       std:: vector<Texture * > text);
 
 vertexArgs createVertexArgs(  float * inf,
-                              int * ind,
                               int infSize,
                               int sizeNextVertex,
                               int posFirstVertex,
-                              int indSize,
                               int numOfVert);
 
 normalArgs createNormalAgrs(int posFirstNorm, int sizeNextNorm);

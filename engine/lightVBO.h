@@ -10,7 +10,7 @@
 #include <string>
 #include <sstream>
 
-class lightVBO : public vbo {
+class lightVBO : public Shape {
 protected:
     unsigned int id;
     glm::vec3 diffuse;
@@ -18,12 +18,14 @@ protected:
     glm::vec3 ambient;
 public:
     static Shader * shader;
-    lightVBO(const vertexArgs &va, const texArgs &ta, const normalArgs & na) : vbo(va, ta, na){
+    lightVBO(const vertexArgs &va) : Shape(va){
         this->shader = new Shader("files/vertexShader2", "files/fragmentShader2", createShaderArgs(0,1,2));
         this->setDiffuse(0.5f, 0.5f, 0.5f);
         this->setSpecular(1.0f, 1.0f, 1.0f);
         this->setAmbient(0.2f, 0.2f, 0.2f);
+        this->initGLBuffers(va);
     }
+    void initGLBuffers(vertexArgs va);
     void updateCoordinates(const char * model);
     void updateNormals(const char * uniform);
     void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);

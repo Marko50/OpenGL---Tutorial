@@ -7,6 +7,26 @@
 Shader * lightVBO:: shader = 0;
 
 
+void lightVBO::initGLBuffers(vertexArgs va) {
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    glGenBuffers(1, &VBO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, va.infSize , va.inf, GL_STATIC_DRAW);
+
+
+    //position
+    glVertexAttribPointer(this->shader->layoutLocationVertex,3,GL_FLOAT,GL_FALSE, va.sizeNextVertex, (void *) va.posFirstVertex);
+    glEnableVertexAttribArray(this->shader->layoutLocationVertex);
+
+
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+}
+
+
 void lightVBO::updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale) {
     glm::mat4 trans;
     trans = glm::rotate(trans, glm::radians(this->degrees), glm::vec3((int)this->rotX, (int)this->rotY, (int)this->rotZ));

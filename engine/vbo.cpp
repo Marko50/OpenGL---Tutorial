@@ -25,10 +25,9 @@ void vbo ::initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) {
 
 
     //texture
-    if(ta.tex){
-        glVertexAttribPointer(this->shader->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, ta.sizeNextTex, (void *) ta.posFirstTex);
-        glEnableVertexAttribArray(this->shader->layoutLocationTex);
-    }
+    glVertexAttribPointer(this->shader->layoutLocationTex, 2 , GL_FLOAT, GL_FALSE, ta.sizeNextTex, (void *) ta.posFirstTex);
+    glEnableVertexAttribArray(this->shader->layoutLocationTex);
+
 
     //unbind
     glBindBuffer(GL_ARRAY_BUFFER, 0);

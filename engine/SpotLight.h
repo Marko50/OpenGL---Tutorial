@@ -9,6 +9,7 @@
 
 
 class SpotLight : public lightVBO {
+private:
     glm::vec3 direction;
     float cutOff;
     float outerCutOff;
@@ -17,7 +18,7 @@ class SpotLight : public lightVBO {
     float quadratic;
 public:
     static unsigned int count;
-    SpotLight(const vertexArgs &va, const texArgs &ta, const normalArgs & na) : lightVBO(va,ta,na){
+    SpotLight(const vertexArgs &va) : lightVBO(va){
         this->direction = glm::vec3(1,0,0);
         this->cutOff = glm::cos(glm::radians(12.5f));
         this->outerCutOff = glm::cos(glm::radians(15.0f));

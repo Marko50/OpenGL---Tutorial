@@ -14,7 +14,7 @@ class PointLight : public lightVBO {
     float quadratic;
 public:
     static unsigned int count;
-    PointLight (const vertexArgs &va, const texArgs &ta, const normalArgs & na) : lightVBO(va,ta,na){
+    PointLight (const vertexArgs &va) : lightVBO(va){
         this->setQuadratic(0.032f);
         this->setLinear(0.0f);
         this->setConstant(1.0f);

@@ -14,8 +14,6 @@ shaderArgs createShaderArgs(int lposVer,  int lPosNorm, int lPosTex);
 
 struct vertexArgs{
     float * inf;
-    int * ind;
-    int indSize;
     int infSize;
     int sizeNextVertex;
     int posFirstVertex;
@@ -23,7 +21,6 @@ struct vertexArgs{
 };
 
 struct texArgs{
-    bool tex;
     int sizeNextTex;
     int posFirstTex;
     std:: vector<Texture * > text;
@@ -43,11 +40,9 @@ protected:
     int numOfVert;
     unsigned int VAO;
     unsigned int VBO;
-    std::vector<Texture *> textures;
     glm::mat4 m;
 public:
-    Shape(vertexArgs va, texArgs ta);
-    virtual  void initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) = 0;
+    Shape(vertexArgs va);
     virtual void draw() = 0;
     void translate(float x, float y, float z);
     void scale(float x, float y, float z);

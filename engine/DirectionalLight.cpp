@@ -27,10 +27,7 @@ void DirectionalLight::draw(){
     this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateNormals("modelChanged");
-    for(unsigned int i = 0; i < this->textures.size(); i++){
-        glActiveTexture(this->textures[i]->getTextureUnit());
-        glBindTexture(GL_TEXTURE_2D, this->textures[i]->getTexture());
-    }
+
     glBindVertexArray(this->VAO);
     glDrawArrays(GL_TRIANGLES, 0,this->numOfVert);*/
 }

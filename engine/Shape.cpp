@@ -12,12 +12,11 @@ shaderArgs createShaderArgs(int lposVer,  int lNormAgrs, int lPosTex){
     return  sa;
 }
 
-Shape::Shape(vertexArgs va,texArgs ta ){
+Shape::Shape(vertexArgs va){
     this->scale(1,1,1);
     this->translate(0.0,0,0);
     this->rotate(0,true,true,true);
     this->numOfVert = va.numOfVert;
-    this->textures = ta.text;
     this->m = glm::rotate(m, glm::radians(20.0f),glm::vec3(1.0f,0.3f,0.5f));
 }
 
