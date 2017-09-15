@@ -35,17 +35,6 @@ void vbo ::initGLBuffers(vertexArgs va, texArgs ta, normalArgs na) {
 
 }
 
-void vbo::updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale) {
-    glm::mat4 trans;
-    trans = glm::rotate(trans, glm::radians(this->degrees), glm::vec3((int)this->rotX, (int)this->rotY, (int)this->rotZ));
-    this->shader->setMatrix4fv(uniformRot, trans);
-    glm::mat4 trans2;
-    trans2 = glm::translate(trans2, glm::vec3(this->x,this->y,this->z));
-    this->shader->setMatrix4fv(uniformTrans, trans2);
-    glm::mat4 trans3;
-    trans3 = glm::scale(trans3, glm::vec3(this->sizex, this->sizey,this->sizez));
-    this->shader->setMatrix4fv(uniformScale, trans3);
-}
 
 void vbo::updateNormals(const char *uniform) {
     glm::mat4 aux;
@@ -59,7 +48,6 @@ void vbo::updateCoordinates(const char *model) {
 
 
 void vbo::draw() {
-    this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateNormals("modelChanged");
     for(unsigned int i = 0; i < this->textures.size(); i++){

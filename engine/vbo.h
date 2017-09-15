@@ -23,7 +23,6 @@ public:
     void draw();
     void updateCoordinates(const char * model);
     void updateNormals(const char * uniform);
-    void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
 };
 
 #endif //GAMEENGINE_TRIANGLE_H

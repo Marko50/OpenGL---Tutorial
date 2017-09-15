@@ -65,7 +65,8 @@ int main(){
     vbo * cube = new vbo(va, ta,na);
     cube->translate(-3.0f,-3.0f,-2.0f);
     vbo * cube2 = new vbo(va, ta,na);
-    cube2->rotate(30,true,false,false);
+    cube2->rotate(30,true,true,false);
+    //cube2->scale(0.5f,0.5f,0.5f);
     vbo * cube3 = new vbo(va, ta,na);
     cube3->translate(-2.0f,-2.0f,-3.0f);
     vbo * cube4 = new vbo(va, ta,na);
@@ -86,12 +87,14 @@ int main(){
     directionalLight->setSpecular(0.5f,0.5f,0.5f);
 
     PointLight * pointLight = new PointLight(va);
-    pointLight->translate(3.0f,-3.0f,0.0f);
-    pointLight->scale(0.5f,0.5f,0.5f);
-    pointLight->setDiffuse(1.0f,0.0f,0.0f);
+    pointLight->translate(-3.0f,-3.0f,-5.0f);
+   // pointLight->scale(0.5f,0.5f,0.5f);
+    //pointLight->setDiffuse(1.0f,0.0f,0.0f);
 
     SpotLight * spotLight = new SpotLight(va);
-    spotLight->translate(0.0f,0.0f,2.0f);
+    //spotLight->setDiffuse(1.0f,0.0f,0.0f);
+    //spotLight->setAmbient(1.0f,0.0f,0.0f);
+    spotLight->translate(0.0f,-0.1f,2.0f);
     spotLight->setDirection(glm::vec3(0.0f,0.0f,-1.0f));
     spotLight->scale(0.25f,0.25f,0.25f);
 

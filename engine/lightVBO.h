@@ -28,7 +28,6 @@ public:
     void initGLBuffers(vertexArgs va);
     void updateCoordinates(const char * model);
     void updateNormals(const char * uniform);
-    void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale);
     void updateLightProperties(const char * type, const char * diffuse, const char * spec, const char * amb);
     void setSpecular(float x, float y, float z);
     void setDiffuse(float x, float y , float z);

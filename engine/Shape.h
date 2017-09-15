@@ -49,7 +49,6 @@ public:
     void rotate(float degres, bool x, bool y, bool z);
     virtual void updateCoordinates(const char * model) = 0;
     virtual void updateNormals(const char * uniform) = 0;
-    virtual void updateTransform(const char *uniformTrans, const char * uniformRot, const char * uniformScale) = 0;
     ~Shape(){
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);

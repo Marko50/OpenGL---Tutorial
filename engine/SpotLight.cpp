@@ -15,7 +15,6 @@ void SpotLight::draw() {
     this->updatePosition("position");
 
     glUseProgram(this->shader->ID);
-    this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateNormals("modelChanged");
 

@@ -24,7 +24,6 @@ void DirectionalLight::draw(){
     this->updateDirection("direction");
 
     /*glUseProgram(this->shader->ID);
-    this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateNormals("modelChanged");
 

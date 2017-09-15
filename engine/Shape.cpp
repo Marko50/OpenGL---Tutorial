@@ -27,6 +27,7 @@ void Shape::rotate(float degres, bool x, bool y, bool z) {
     this->rotX = x;
     this->rotY = y;
     this->rotZ = z;
+    this->m = glm::rotate(m, glm::radians(degres),glm::vec3((int) x, (int) y, (int) z));
 }
 
 void Shape::translate(float x, float y, float z) {
@@ -40,4 +41,5 @@ void Shape::scale(float x, float y, float z) {
     this->sizex = x;
     this->sizey = y;
     this->sizez = z;
+    this->m = glm::scale(m, glm::vec3(x,y,z));
 }

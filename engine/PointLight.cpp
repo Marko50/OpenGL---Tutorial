@@ -13,7 +13,6 @@ void PointLight::draw() {
     this->updateAttenuation("constant", "linear", "quadratic");
 
     glUseProgram(this->shader->ID);
-    this->updateTransform("transformTrans","transformRot","transformScale" );
     this->updateCoordinates("model");
     this->updateNormals("modelChanged");
 
