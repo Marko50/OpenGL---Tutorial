@@ -7,9 +7,6 @@
   out vec3 Normal;
   out vec3 FragPos;
 
-  uniform mat4 transformRot;
-  uniform mat4 transformTrans;
-  uniform mat4 transformScale;
   uniform mat4 model;
   uniform mat4 view;
   uniform mat4 projection;
